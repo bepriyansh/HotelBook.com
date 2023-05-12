@@ -1,50 +1,50 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import { createError } from '../utils/createError.js';
+// import jwt from 'jsonwebtoken';
 
 export const register = async (req, res, next) => {
-
-    var { username, email, password, isAdmin } = req.body;
+    console.log("Controllers Folder (auth.js");
+    var { username, password, ...otherDetails } = req.body;
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password);
-    password = hash;
+    password = bcrypt.hashSync(password);
 
     try {
-        // Check if user already exists
         const existingUser = await User.findOne({ username });
-        if (existingUser) {
+
+        if (existingUser)
             return res.status(400).json({ message: 'User already exists' });
-        }
 
-        // Create new user document
-        const user = new User({ username, email, password, isAdmin });
 
-        // Save new user to the database
+        const user = new User({ username, password, ...otherDetails });
         await user.save();
-
-        // Send response with success message
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
         next(error);
     }
 };
 
-export const login = async (req, res, next) => {
 
-    var { username, email, password, isAdmin } = req.body;
+// export const login = async (req, res, next) => {
+//     const { username, password } = req.body;
 
-    try {
-        const User = await User.findOne({ username });
-        if (!User) {
-            return next(createError(404, 'User Not Found'));
-        }
+//     try {
+//         const user = await User.findOne({ username });
+//         if (!User)
+//             return next(createError(404, 'User Not Found'));
 
-        const isValidUser = await bcrypt.compare(password, User.password);
-        if (!isValidUser) {
-            return next(createError(400, "Wrong Password"));
-        }
-        res.status(201).json({ message: 'Logged in successfully' });
-    } catch (error) {
-        next(error);
-    }
-};
+
+//         const isValidUser = await bcrypt.compare(password, user.password);
+//         if (!isValidUser)
+//             return next(createError(400, "Wrong Password"));
+
+//         const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin },
+//             process.env.JWT_SECRET_KEY
+//         );
+//         res.cookie("access_token", token, {
+//             httpOnly: true
+//         }).status(201).json({ message: 'Logged in successfully' });
+//     } catch (error) {
+//         next(error);
+//     }
+// };

@@ -4,7 +4,6 @@ import { createHotel, deleteHotel, getHotel, getHotels, updateHotel } from '../c
 const router = express.Router();
 
 // CREATE operation
-console.log("Route folder")
 router.post('/', createHotel);
 
 // READ All

@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -12,7 +13,6 @@ import { errorHandler } from "./utils/errorHandler.js";
 
 const app = Express();
 // ConnectDB();
-import mongoose from "mongoose";
 
 export const ConnectDB = async () => {
     try {
@@ -32,7 +32,6 @@ ConnectDB();
 app.use(cookieParser)
 app.use(Express.json());
 
-console.log("Index.js runs")
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/room', roomRoutes);

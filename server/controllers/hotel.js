@@ -3,8 +3,6 @@ import Hotel from '../models/hotel.js';
 // CREATE operation
 export const createHotel = async (req, res, next) => {
     try {
-        console.log('Controllers folder');
-
         const newHotel = new Hotel(req.body);
         await newHotel.save();
         res.status(201).json(newHotel);

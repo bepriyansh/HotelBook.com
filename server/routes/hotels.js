@@ -1,74 +1,22 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import Hotel from '../models/hotel.js';
+import { createHotel, deleteHotel, getHotel, getHotels, updateHotel } from '../controllers/hotel.js';
 
 const router = express.Router();
 
 // CREATE operation
-router.post('/', async (req, res) => {
-  try {
-    const newHotel = new Hotel(req.body);
-    await newHotel.save();
-    res.status(201).json(newHotel);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+console.log("Route folder")
+router.post('/', createHotel);
 
-// READ operation to fetch all hotels
-router.get('/', async (req, res) => {
-  try {
-    const hotels = await Hotel.find({});
-    res.json(hotels);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// READ All
+router.get('/', getHotels);
 
-// READ operation to fetch a single hotel by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const hotel = await Hotel.findById(req.params.id);
-    if (!hotel) {
-      return res.status(404).json({ message: 'Hotel not found' });
-    }
-    res.json(hotel);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// READ One by Id
+router.get('/:id', getHotel);
 
-// UPDATE operation
-router.patch('/:id', async (req, res) => {
-  try {
-    const hotel = await Hotel.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!hotel) {
-      return res.status(404).json({ message: 'Hotel not found' });
-    }
-    res.json(hotel);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// UPDATE
+router.patch('/:id', updateHotel);
 
-// DELETE operation
-router.delete('/:id', async (req, res) => {
-  try {
-    const hotel = await Hotel.findByIdAndDelete(req.params.id);
-    if (!hotel) {
-      return res.status(404).json({ message: 'Hotel not found' });
-    }
-    res.json({ message: 'Hotel deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// DELETE
+router.delete('/:id', deleteHotel);
 
 export default router;

@@ -1,21 +1,27 @@
 import express from 'express';
-import { createHotel, deleteHotel, getHotel, getHotels, updateHotel } from '../controllers/hotel.js';
+import { createHotel, deleteHotel, getHotel, getHotelCountByCity, getHotels, updateHotel } from '../controllers/hotel.js';
+import { verifyAdmin } from '../utils/verification.js';
 
 const router = express.Router();
 
 // CREATE operation
-router.post('/', createHotel);
+router.post('/', verifyAdmin, createHotel); //Only admin can create a new Hotel
 
 // READ All
-router.get('/', getHotels);
+router.get('/', getHotels); // Public access
 
 // READ One by Id
-router.get('/:id', getHotel);
+router.get('/id/:id', getHotel); // Public access
 
 // UPDATE
-router.patch('/:id', updateHotel);
+router.patch('/id/:id', verifyAdmin, updateHotel); //Only admin can update a Hotel
 
 // DELETE
-router.delete('/:id', deleteHotel);
+router.delete('/id/:id', verifyAdmin, deleteHotel); //Only admin can delete a Hotel
+
+
+router.get('/countByCity', getHotelCountByCity); // Public access
+router.get('/', getHotels); // Public access
+router.get('/', getHotels); // Public access
 
 export default router;

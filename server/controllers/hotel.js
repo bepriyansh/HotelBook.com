@@ -61,3 +61,19 @@ export const deleteHotel = async (req, res, next) => {
         next(error);
     }
 };
+
+
+
+export const getHotelCountByCity = async (req, res, next) => {
+    const cities = req.query.cities.split(",");
+    try {
+      const countList = await Promise.all(
+        cities.map((city) => {
+          return Hotel.countDocuments({ city: city });
+        })
+      );
+      res.status(200).json(countList);
+    } catch (error) {
+        next(error);
+    }
+};

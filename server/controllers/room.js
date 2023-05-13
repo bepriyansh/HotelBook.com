@@ -2,7 +2,7 @@ import Hotel from "../models/hotel.js";
 import Room from "../models/room.js";
 
 export const createRoom = async (req, res, next) => {
-    const hotelId = req.params.hotelid;
+    const hotelId = req.params.hotelId;
     const newRoom = new Room(req.body);
 
     try {
@@ -50,7 +50,7 @@ export const updateRoomAvailability = async (req, res, next) => {
 };
 
 export const deleteRoom = async (req, res, next) => {
-    const hotelId = req.params.hotelid;
+    const hotelId = req.params.hotelId;
     try {
         await Room.findByIdAndDelete(req.params.id);
         try {

@@ -142,12 +142,12 @@
     position: absolute;
     overflow: hidden;
     top: 40px;
+    z-index: 20;
+    left: -50px;
     border: 1px solid wheat;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    z-index: 1;
 }
-
 .options {
     position: absolute;
     top: 35px;

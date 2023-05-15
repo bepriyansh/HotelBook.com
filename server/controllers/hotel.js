@@ -13,8 +13,13 @@ export const createHotel = async (req, res, next) => {
 
 // READ operation to fetch all hotels
 export const getHotels = async (req, res, next) => {
+    const { min, max, limit, ...otherDetails } = req.query;
     try {
-        const hotels = await Hotel.find({});
+        const hotels = await Hotel.find({
+            ...otherDetails,
+            cheapestPrice: { $gt: min || 0, $lt: max || 999999 }
+        }).limit(limit);
+        console.log("Total hotels = ",hotels.length);
         res.json(hotels);
     } catch (error) {
         next(error);
@@ -63,16 +68,73 @@ export const deleteHotel = async (req, res, next) => {
 };
 
 
+// This function uses the Mongoose aggregate method to group hotels by type and count them
+export const getHotelCountByType = async (req, res, next) => {
+
+    const {limit} = req.query;
+    /*
+    The $group operator is a pipeline stage that groups documents 
+    by a specified field and performs aggregate calculations on the grouped documents. 
+    It is followed by the $sum operator, which is used to sum the values 
+    of a specified field across all documents in the group.
+    */
+
+    try {
+        const hotelCounts = await Hotel.aggregate([
+            // The $group pipeline stage groups hotels by type and counts them
+            {
+                $group: {
+                    _id: '$type', // Group by the "type" field
+                    count: { $sum: 1 }, // Count the number of hotels in each group
+                },
+            },
+        ]);
+
+        const result = hotelCounts.map(({ _id, count }) => ({ type: _id, count }));
+        res.status(200).json(result.slice(0,limit));
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+export const getAllCityHotelCount = async (req, res, next) => {
+
+    const {limit} = req.query;
+    
+    try {
+        const hotelCounts = await Hotel.aggregate([
+            {
+                $group: {
+                    _id: '$city', 
+                    count: { $sum: 1 }, 
+                },
+            },
+        ]);
+
+        const result = hotelCounts.map(({ _id, count }) => ({ city: _id, count }));
+        res.status(200).json(result.slice(0,limit));
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 export const getHotelCountByCity = async (req, res, next) => {
     const cities = req.query.cities.split(",");
     try {
-      const countList = await Promise.all(
-        cities.map((city) => {
-          return Hotel.countDocuments({ city: city });
-        })
-      );
-      res.status(200).json(countList);
+        const countList = await Promise.all(
+            cities.map((city) => {
+                return Hotel.countDocuments({ city: city });
+            })
+        );
+
+        const result = cities.map((city, index) => ({
+            city: city,
+            count: countList[index]
+        }));
+
+        res.status(200).json(result);
     } catch (error) {
         next(error);
     }

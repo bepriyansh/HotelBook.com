@@ -1,6 +1,6 @@
 import Express from "express";
 import cookieParser from "cookie-parser";
-// import cors from "cors";
+import cors from "cors";
 import dotenv from "dotenv";
 
 import authRoutes from "./routes/auth.js";
@@ -16,13 +16,13 @@ const app = Express();
 
 ConnectDB();
 
-// const corsOptions = {
-//     origin: 'http://localhost:3000/', // allow requests from this origin
-//     optionsSuccessStatus: 200 // return a 200 status code for preflight requests
-//   };
+const corsOptions = {
+    origin: 'http://localhost:3000', // allow requests from this origin
+    optionsSuccessStatus: 200 // return a 200 status code for preflight requests
+  };
   
-//middleware
-// app.use(cors(corsOptions));
+// middleware
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(Express.json());
 

@@ -1,23 +1,34 @@
-.footer{
-    width: 1024px;
-    max-width: 100%;
-    font-size: 12px;
+.footer {
+  width: 100%;
+  padding-top: 20px;
+  font-size: 12px;
+  background-color: #333;
+}
+
+.fLists {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 525px) {
+  .fLists {
+    flex-direction: column;
+    margin: 0px 25%;
   }
-  
-  .fLists{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-  }
-  
-  .fList{
-    list-style: none;
-    padding: 0;
-  }
-  
-  .fListItem{
-    margin-bottom: 10px;
-    color: #003580;
-    cursor: pointer;
-  }
+}
+
+.fList {
+  list-style: none;
+  padding: 0;
+}
+
+.fListItem {
+  margin-bottom: 10px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.fText {
+  color: darkkhaki;
+}

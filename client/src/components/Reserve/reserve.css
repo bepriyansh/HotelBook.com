@@ -1,0 +1,59 @@
+.rooms {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+}
+
+.roomItemInfo {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    width: 300px;
+}
+
+.roomTitle {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.roomDescription {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.roomMaxPeople {
+    margin-top: 3px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.availableRooms {
+    border: 1px solid darkblue;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.roomsAvailablity {
+    display: flex;
+    flex-direction: column;
+}
+
+.roomNumber {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.unavailableDates {
+    margin-left: 25px;
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createHotel, deleteHotel, getAllCityHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotels, updateHotel } from '../controllers/hotel.js';
+import { createHotel, deleteHotel, getAllCityHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotelRooms, getHotels, updateHotel } from '../controllers/hotel.js';
 import { verifyAdmin } from '../utils/verification.js';
 
 const router = express.Router();
@@ -23,6 +23,6 @@ router.delete('/id/:id', verifyAdmin, deleteHotel); //Only admin can delete a Ho
 router.get('/countByCity', getHotelCountByCity); // Public access
 router.get('/countByType', getHotelCountByType); // Public access
 router.get('/allHotelCountByCity', getAllCityHotelCount); // Public access
-// router.get('/', getHotels); // Public access
+router.get('/rooms/:id', getHotelRooms); // Public access
 
 export default router;

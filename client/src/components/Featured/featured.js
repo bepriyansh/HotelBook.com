@@ -1,10 +1,11 @@
-import useFetch from '../hooks/useFetch';
+import { baseURL } from '../../baseURL/baseURL';
+import useFetch from '../../hooks/useFetch';
 import './featured.css'
 
 const Featured = () => {
 
-  const { data, loading, error } = useFetch("/hotel/countByCity?cities=New Delhi,Mumbai,Bangalore");
-  console.log(data, loading, error);
+  const { data, loading, error } = useFetch(`${baseURL}/hotel/countByCity?cities=New Delhi,Mumbai,Bangalore`);
+  // console.log(data, loading, error);
 
   return (
     <div>

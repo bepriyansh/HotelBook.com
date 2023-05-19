@@ -6,7 +6,8 @@ import { DateRange } from "react-date-range";
 import Navbar from "../../components/Navbar/navbar";
 import Header from "../../components/Header/header";
 import SearchItems from "../../components/SearchItems/searchitems";
-import useFetch from "../../components/hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
+import { baseURL } from "../../baseURL/baseURL";
 
 const Hotels = () => {
   const location = useLocation();
@@ -16,11 +17,22 @@ const Hotels = () => {
   const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(99999);
-  console.log(options);
+  // console.log(options);
 
-  const { data, loading, error } = useFetch(`/hotel?city=${destination}`);
-  console.log(data, loading, error);
+  const handleOptions = (name, value) => {
+    setOptions(prev => {
+      return {
+        ...prev, [name]: value ? options[name] = value : options[name],
+      }
+    })
+  }
 
+  const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel?city=${destination}&min=${min || 0}&max=${max || 99999}`);
+  // console.log( error);
+
+  const handleClick = () => {
+    reFetch();
+  };
   return (
     <div>
       <Navbar />
@@ -69,6 +81,7 @@ const Hotels = () => {
                     min={1}
                     className="lsOptionInput"
                     value={options.adults}
+                    onChange={(e) => handleOptions('adults', e.target.value)}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -78,6 +91,7 @@ const Hotels = () => {
                     min={0}
                     className="lsOptionInput"
                     value={options.children}
+                    onChange={(e) => handleOptions('children', e.target.value)}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -87,16 +101,17 @@ const Hotels = () => {
                     min={1}
                     className="lsOptionInput"
                     value={options.rooms}
+                    onChange={(e) => handleOptions('rooms', e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <button onClick={() => setOptions(options)}>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
 
           <div className="listResult">
             {
-              loading ? <h1>Loading...</h1> :
+              !error && loading ? <h1>Loading...</h1> :
                 <div>
                   {data.map(data => (<SearchItems data={data} key={data._id} />))}
                 </div>

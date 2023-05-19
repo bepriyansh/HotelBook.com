@@ -1,16 +1,16 @@
-import useFetch from '../hooks/useFetch';
+import { baseURL } from '../../baseURL/baseURL';
+import useFetch from '../../hooks/useFetch';
 import './featuredproperty.css';
 
 const FeaturedProperty = () => {
 
 
-  const { data, loading, error } = useFetch("/hotel?featured=true&limit=3");
-  console.log(data, loading, error);
+  const { data, loading, error } = useFetch(`${baseURL}/hotel?featured=true&limit=3`);
 
   return (
     <div>
       {
-        loading ? <h1>Loading...</h1> :
+        !error && loading ? <h1>Loading...</h1> :
           <div className="fp">
             {(data).map((data, index) => (
               <div className="fpItem" key={index}>

@@ -24,6 +24,7 @@
 }
 
 .navButton {
+    text-decoration: none;
     border: 2px solid wheat;
     border-radius: 8px;
     margin-right: 8px;

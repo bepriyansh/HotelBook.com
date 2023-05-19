@@ -1,4 +1,5 @@
-import useFetch from '../hooks/useFetch';
+import { baseURL } from '../../baseURL/baseURL';
+import useFetch from '../../hooks/useFetch';
 import './propertylist.css'
 // import {Link} from 'react-router-dom'
 
@@ -12,8 +13,8 @@ const Propertylist = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
   ];
 
-  const { data, loading, error } = useFetch("/hotel/countByType?limit=5");
-  console.log(data, loading, error);
+  const { data, loading, error } = useFetch(`${baseURL}/hotel/countByType?limit=5`);
+  // console.log(data, loading, error);
   return (
     <div>
       {

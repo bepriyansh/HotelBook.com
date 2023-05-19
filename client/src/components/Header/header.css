@@ -14,7 +14,7 @@
     margin-bottom: 20px;
     margin-right: 8px;
     margin-left: 8px;
-    z-index: 0;
+    z-index: 1;
 }
 
 .headerList {
@@ -97,6 +97,10 @@
 }
 
 .headerSearchInput {
+    background-color: wheat;
+    color: black;
+    font-size: 14px;
+    width: max-content;
     border: none;
     padding: 8px;
     border-radius: 8px;
@@ -111,8 +115,9 @@
 
     .headerSearchItems {
         width: 100%;
+        display: flex;
+        justify-content: flex-start;
     }
-
     .headerSearchInput {
         width: 100%;
         margin-right: 4px;
@@ -128,6 +133,7 @@
 @media screen and (max-width: 375px) {
     .date {
         transform: scale(.8);
+        left:-50px
     }
 }
 
@@ -142,11 +148,17 @@
     position: absolute;
     overflow: hidden;
     top: 40px;
-    z-index: 20;
-    left: -50px;
+    z-index: 2;
+    /* left: -50px; */
     border: 1px solid wheat;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
+}
+
+@media screen and (min-width:530px) and ( max-width: 720px) {
+    .date{
+        left: -120px;
+    }
 }
 .options {
     position: absolute;
@@ -162,7 +174,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: default;
-    z-index: 1;
+    z-index: 2;
 }
 
 .optionItem {

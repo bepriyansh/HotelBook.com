@@ -4,11 +4,12 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { format } from 'date-fns';
 import 'react-date-range/dist/styles.css'; // main css file for calendar range
 import 'react-date-range/dist/theme/default.css'; // theme css file for calendar range
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { useNavigate } from 'react-router-dom';
+import { SearchContext } from '../../Context/searchContext';
 
-const Header = ({type}) => {
+const Header = ({ type }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [dates, setDates] = useState([
     {
@@ -35,7 +36,11 @@ const Header = ({type}) => {
 
   const navigate = useNavigate();
   const [destination, setDestination] = useState("");
+
+  const { dispatch } = useContext(SearchContext);
+
   const handleSearch = () => {
+    dispatch({ type: 'NEW_SEARCH', payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
 
@@ -67,7 +72,7 @@ const Header = ({type}) => {
         {type !== 'list' && <>
           <h1 className="headerTitle">A lifetime of discounts? It's Genius</h1>
           <p className='headerDesc'>Get rewarded for your travels - unlock instant savings of 10% or more with a free HotelBook account</p>
-          <button className='headerSignButton'>Sign in / Register</button>
+          {localStorage.getItem("user") === null && <button className='headerSignButton'>Sign in / Register</button>}
 
           <div className='headerSearch'>
             <div className='headerSearchItems'>

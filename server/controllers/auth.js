@@ -32,6 +32,10 @@ export const login = async (req, res, next) => {
         if (!user)
             return next(createError(404, 'User Not Found'));
 
+        if (!req.body.password)
+            return next(createError(404, 'Password Required'));
+
+        
         const isValidPassword = await bcrypt.compare(req.body.password, user.password);
         if (!isValidPassword)
             return next(createError(400, "Wrong Password"));

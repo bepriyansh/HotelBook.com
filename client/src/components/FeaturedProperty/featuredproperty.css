@@ -2,12 +2,14 @@
     width: 100%;
     max-width: 1024px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     gap: 20px;
   }
   
   .fpItem{
-    flex: 1;
+    width: 95%;
+    max-width: 315px;
     gap: 10px;
     display: flex;
     flex-direction: column;

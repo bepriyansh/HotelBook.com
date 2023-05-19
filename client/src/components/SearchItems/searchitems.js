@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './searchitems.css'
 
 const SearchItems = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="searchItem">
       <img
@@ -11,14 +11,14 @@ const SearchItems = ({ data }) => {
         className="siImg"
       />
       <div className="siDesc">
-        <h1 className="siTitle">{data.name}</h1>
+        <h1 className="siTitle">{data.name.slice(0,30)}</h1>
         <span className="siDistance">{data.distance}</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
-          {data.title}
+          {data.title.slice(0,50)+"..."}
         </span>
         <span className="siFeatures">
-          {data.description}
+          {data.description.slice(0,100)+"..."}
         </span>
         <span className="siCancelOp">Free cancellation </span>
         <span className="siCancelOpSubtitle">

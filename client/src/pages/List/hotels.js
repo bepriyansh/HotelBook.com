@@ -1,5 +1,4 @@
 import "./hotels.css";
-// import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
@@ -9,41 +8,39 @@ import SearchItems from "../../components/SearchItems/searchitems";
 import useFetch from "../../hooks/useFetch";
 import { baseURL } from "../../baseURL/baseURL";
 import { SearchContext } from "../../Context/searchContext";
+import { useLocation } from "react-router-dom";
 
 const Hotels = () => {
-  // const location = useLocation();
-  const { destination, dates, options, dispatch } = useContext(SearchContext);
+  const location = useLocation();
 
-  useEffect(() => {
-    console.log(new Date(JSON.parse(localStorage.getItem("searchState")).dates[0].endDate))
-    console.log(new Date(JSON.parse(localStorage.getItem("searchState")).dates[0].startDate))
-    console.log("from useeffect hook === ",destination, dates, options);
-  }, [destination, dates, options])
-  
-  const [searchedDestination, setDestination] = useState(destination);
-  const [date, setDate] = useState(dates);
+  const [destination, setDestination] = useState(location.state.destination);
+  const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
-  const [option, setOptions] = useState(options);
+  const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(99999);
-  // console.log(options);
 
   const handleOptions = (name, value) => {
     setOptions(prev => {
       return {
-        ...prev, [name]: value ? option[name] = value : option[name],
+        ...prev, [name]: value ? options[name] = value : options[name],
       }
     })
   }
-  console.log(dates)
 
   const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel?city=${destination}&min=${min || 0}&max=${max || 99999}`);
-  // console.log( error);
 
+  const { dispatch } = useContext(SearchContext);
   const handleClick = () => {
-    dispatch({ type: 'NEW_SEARCH', payload: { destination: searchedDestination, dates: date, options: option } });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     reFetch();
   };
+
+  useEffect(() => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+  }, [dates, destination, dispatch, options])
+
+
   return (
     <div>
       <Navbar />
@@ -54,20 +51,20 @@ const Hotels = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input value={searchedDestination} type="text" onChange={(e) => setDestination(e.target.value)} />
+              <input value={destination} type="text" onChange={(e) => setDestination(e.target.value)} />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
               <span className="dateInput" onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                dates[0].startDate,
                 "dd/MM/yyyy"
-              )} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+              )} to ${format(dates[0].endDate, "dd/MM/yyyy")}`}
               </span>
               {openDate && (
                 <DateRange
-                  onChange={(item) => setDate([item.selection])}
+                  onChange={(item) => setDates([item.selection])}
                   minDate={new Date()}
-                  ranges={date}
+                  ranges={dates}
                 />
               )}
             </div>
@@ -92,7 +89,7 @@ const Hotels = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    value={option.adults}
+                    value={options.adults}
                     onChange={(e) => handleOptions('adults', e.target.value)}
                   />
                 </div>
@@ -102,7 +99,7 @@ const Hotels = () => {
                     type="number"
                     min={0}
                     className="lsOptionInput"
-                    value={option.children}
+                    value={options.children}
                     onChange={(e) => handleOptions('children', e.target.value)}
                   />
                 </div>
@@ -112,7 +109,7 @@ const Hotels = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    value={option.rooms}
+                    value={options.rooms}
                     onChange={(e) => handleOptions('rooms', e.target.value)}
                   />
                 </div>

@@ -4,7 +4,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { format } from "date-fns";
 import "react-date-range/dist/styles.css"; // main css file for calendar range
 import "react-date-range/dist/theme/default.css"; // theme css file for calendar range
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../Context/searchContext";
@@ -24,6 +24,8 @@ const Header = ({ type }) => {
     }));
 
     setOpenSearchSuggestions(true);
+    setShowCalendar(false);
+    setShowOptions(false);
     if (e.target.value === "") {
       setfilteredSuggestions([]);
       setOpenSearchSuggestions(false);
@@ -68,13 +70,16 @@ const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
 
   const { dispatch } = useContext(SearchContext);
-
+  useEffect(() => {
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+  }, [dates, destination, dispatch, options])
+  
+  
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
     navigate("/hotels", { state: { destination, dates, options } });
   };
 
-  // console.log(dates)
   return (
     <div className="header">
       <div className="headerContainer">

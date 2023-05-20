@@ -50,11 +50,7 @@ export const SearchContextProvider = ({ children }) => {
         <SearchContext.Provider
             value={{
                 destination: state.destination,
-                dates: [{
-                    endDate: new Date(JSON.parse(localStorage.getItem("searchState"))?.dates[0].endDate) || new Date(),
-                    key: 'selection',
-                    startDate: new Date(JSON.parse(localStorage.getItem("searchState"))?.dates[0].startDate) || new Date()
-                }],
+                dates: state.dates,
                 options: state.options,
                 dispatch
             }}>

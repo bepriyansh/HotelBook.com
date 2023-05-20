@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/authContext';
 
 const Navbar = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [username, setUsername] = useState(null);
+  const [openLogOutButton, setOpenLogOutButton] = useState(false)
 
   useEffect(() => {
     if (user !== null && user) {
       setUsername(user.user.username);
     }
-  }, [username]);
+  }, [user, username]);
 
   return (
     <div className='navbar'>
@@ -23,7 +24,14 @@ const Navbar = () => {
             <Link to='/login' className='navButton'>Login</Link>
           </>
           }
-          {username && <button className='navButton'>Hello <b>{username}</b></button>}
+          {username && <button onClick={() => setOpenLogOutButton(!openLogOutButton)} className='navButton'>Hello <b>{username}</b></button>}
+          {openLogOutButton && <div className='logoutContainer'><div className='logoutWrapper'>
+            <div className='logoutText'>Do you want to log out?</div>
+            <div className='logoutButtons'>
+              <button onClick={() => setOpenLogOutButton(false)} className='logoutButton'>Log Out</button>
+              <button onClick={() => setOpenLogOutButton(false)} className='logoutButton'>No</button>
+            </div>
+          </div></div>}
         </div>
       </div>
     </div>

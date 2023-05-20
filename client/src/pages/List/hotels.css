@@ -39,6 +39,7 @@
 }
 
 .lsItem>input {
+  border-radius: 5px;
   height: 30px;
   border: none;
   padding: 5px;
@@ -57,6 +58,10 @@
   padding: 10px;
 }
 
+.dateInput {
+  border-radius: 5px;
+}
+
 .lsOptionItem {
   display: flex;
   justify-content: space-between;
@@ -66,13 +71,16 @@
 }
 
 .lsOptionInput {
+  border: none;
+  border-radius: 5px;
   width: 70px;
 }
 
 .listSearch>button {
   padding: 10px;
-  background-color: #0071c2;
-  color: white;
+  background-color: #c3e710;
+  color: black;
+  border-radius: 12px;
   border: none;
   width: 100%;
   font-weight: 500;

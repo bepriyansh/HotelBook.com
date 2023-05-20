@@ -20,7 +20,7 @@ export const getHotels = async (req, res, next) => {
             ...otherDetails,
             cheapestPrice: { $gt: min || 0, $lt: max || 999999 }
         }).limit(limit);
-        console.log("Total hotels = ",hotels.length);
+        console.log("Total hotels = ", hotels.length);
         res.json(hotels);
     } catch (error) {
         next(error);
@@ -72,7 +72,7 @@ export const deleteHotel = async (req, res, next) => {
 // This function uses the Mongoose aggregate method to group hotels by type and count them
 export const getHotelCountByType = async (req, res, next) => {
 
-    const {limit} = req.query;
+    const { limit } = req.query;
     /*
     The $group operator is a pipeline stage that groups documents 
     by a specified field and performs aggregate calculations on the grouped documents. 
@@ -92,7 +92,7 @@ export const getHotelCountByType = async (req, res, next) => {
         ]);
 
         const result = hotelCounts.map(({ _id, count }) => ({ type: _id, count }));
-        res.status(200).json(result.slice(0,limit));
+        res.status(200).json(result.slice(0, limit));
     } catch (error) {
         next(error);
     }
@@ -101,20 +101,20 @@ export const getHotelCountByType = async (req, res, next) => {
 
 export const getAllCityHotelCount = async (req, res, next) => {
 
-    const {limit} = req.query;
-    
+    const { limit } = req.query;
+
     try {
         const hotelCounts = await Hotel.aggregate([
             {
                 $group: {
-                    _id: '$city', 
-                    count: { $sum: 1 }, 
+                    _id: '$city',
+                    count: { $sum: 1 },
                 },
             },
         ]);
 
         const result = hotelCounts.map(({ _id, count }) => ({ city: _id, count }));
-        res.status(200).json(result.slice(0,limit));
+        res.status(200).json(result.slice(0, limit));
     } catch (error) {
         next(error);
     }
@@ -144,7 +144,7 @@ export const getHotelCountByCity = async (req, res, next) => {
 export const getHotelRooms = async (req, res, next) => {
     try {
         const hotel = await Hotel.findById(req.params.id);
-        const list = await Promise.all(hotel.rooms.map((roomId) =>{
+        const list = await Promise.all(hotel.rooms.map((roomId) => {
             return Room.findById(roomId);
         }));
         res.status(200).json(list);
@@ -152,3 +152,12 @@ export const getHotelRooms = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getAllCities = async (req, res, next) => {
+    try {
+        const cities = await Hotel.distinct('city');
+        res.json(cities);
+    } catch (error) {
+        next(error);
+    }
+}

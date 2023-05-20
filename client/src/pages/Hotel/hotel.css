@@ -52,7 +52,7 @@
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
 }
 
 .hotelImgWrapper {
@@ -67,10 +67,10 @@
   width: 100%;
   object-fit: cover;
   cursor: pointer;
-  transition:150ms ease-in-out;
+  transition: 150ms ease-in-out;
 }
 
-.hotelImg:hover{
+.hotelImg:hover {
   transition: 300ms ease-in-out;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
   transform: scale(1.02);

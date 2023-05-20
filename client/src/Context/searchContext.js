@@ -1,8 +1,12 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
-const INITIAL_STATE = {
+const INITIAL_STATE = JSON.parse(localStorage.getItem("searchState")) || {
     destination: undefined,
-    dates: [],
+    dates: [{
+        endDate: new Date(),
+        key: 'selection',
+        startDate: new Date()
+    }],
     options: {
         adults: undefined,
         children: undefined,
@@ -17,6 +21,7 @@ const SearchReducer = (state, action) => {
         case "NEW_SEARCH":
             return action.payload;
         case "RESET_SEARCH":
+            console.log("RESET_SEARCH");
             return INITIAL_STATE;
         default:
             return state;
@@ -26,11 +31,30 @@ const SearchReducer = (state, action) => {
 export const SearchContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
 
+    useEffect(() => {
+        localStorage.setItem("searchState", JSON.stringify({
+            destination: state.destination || undefined,
+
+            dates: [{
+                endDate: state.dates[0].endDate.toString() || new Date(),
+                key: 'selection',
+                startDate: state.dates[0].startDate.toString() || new Date()
+            }],
+
+            options: state.options || {},
+        }));
+
+    }, [state]);
+
     return (
         <SearchContext.Provider
             value={{
-                city: state.city,
-                dates: state.dates,
+                destination: state.destination,
+                dates: [{
+                    endDate: new Date(JSON.parse(localStorage.getItem("searchState"))?.dates[0].endDate) || new Date(),
+                    key: 'selection',
+                    startDate: new Date(JSON.parse(localStorage.getItem("searchState"))?.dates[0].startDate) || new Date()
+                }],
                 options: state.options,
                 dispatch
             }}>
@@ -38,3 +62,7 @@ export const SearchContextProvider = ({ children }) => {
         </SearchContext.Provider>
     )
 }
+
+
+
+// JSON.parse(localStorage.getItem("searchState")) || 

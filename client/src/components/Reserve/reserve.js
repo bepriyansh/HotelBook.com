@@ -7,7 +7,7 @@ import { SearchContext } from '../../Context/searchContext';
 
 const Reserve = ({ setOpen, hotelId }) => {
 
-    const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel/rooms/${hotelId}`);
+    const { data } = useFetch(`${baseURL}/hotel/rooms/${hotelId}`);
     // console.log(data, loading, error);
 
     const [selectedRooms, setSelectedRooms] = useState([]);
@@ -21,11 +21,10 @@ const Reserve = ({ setOpen, hotelId }) => {
         );
     }
     const { dates } = useContext(SearchContext);
-    console.log(dates)
     const [requestedDates, setRequestedDates] = useState(dates);
     useEffect(() => {
         setRequestedDates(dates);
-    }, [])
+    }, [dates])
 
 
     const getDatesInRange = (startDate, endDate) => {
@@ -41,12 +40,11 @@ const Reserve = ({ setOpen, hotelId }) => {
         return list;
     }
     const allDates = getDatesInRange(requestedDates[0].startDate, requestedDates[0].endDate);
-    console.log(allDates)
     const isAvailable = (roomNumber) => {
 
-        const isFound = roomNumber.unavailableDates.some((date) =>
+        const isFound = roomNumber.unavailableDates?.some((date) =>
             allDates.includes(new Date(date).getTime())
-        );
+        ) || false;
         // The .some() method iterates over the unavailableDates array and checks if any of the dates satisfy the condition inside the callback function
         // The callback function converts each date in unavailableDates array to a timestamp using new Date(date).getTime()
         // It then checks if this timestamp is present in the allDates array using the .includes() method
@@ -57,14 +55,14 @@ const Reserve = ({ setOpen, hotelId }) => {
         // If isFound is true, indicating that at least one unavailable date was found, the function returns false
         // Otherwise, if isFound is false, indicating that none of the dates in unavailableDates match the dates in alldates, the function returns true
     };
-
     return (
         <div className='reserve'>
             <div className='reserveContainer'>
                 <AiOutlineCloseCircle
+                    className='roomCloseCircle'
                     onClick={() => setOpen(false)}
                 />
-                <span>Select Your rooms:</span>
+                <span className='reserveTitle'>Select Your rooms:</span>
                 <div className='rooms'>
                     {data.map((room) => {
                         return (
@@ -72,17 +70,18 @@ const Reserve = ({ setOpen, hotelId }) => {
                                 <div className='roomItemInfo'>
                                     <div className='roomTitle'>{room.title}</div>
                                     <div className='roomDescription'>{room.description}</div>
-                                    <div className='roomMaxPeople'>Maximum People : {room.maxPeople}</div>
+                                    <div ><span className='roomItemHeadings'>Price : </span>{room.price}</div>
+                                    <div ><span className='roomItemHeadings'>Max. People : </span>{room.maxPeople}</div>
                                     {room.roomNumbers.map((roomNumber) => (
                                         <div className='room' key={roomNumber._id}>
-                                            <label>{roomNumber.number}</label>
+                                            <label className='roomItemHeadings'>Room Num: {roomNumber.number}</label>
                                             <input
                                                 type="checkbox"
                                                 value={roomNumber._id}
                                                 onChange={handleSelect}
-                                            // disabled={!isAvailable(roomNumber)}
+                                                disabled={!isAvailable(roomNumber)}
                                             />
-                                            {/* {isAvailable(roomNumber.number)} */}
+                                            {!isAvailable(roomNumber.number) && <span>Not Available</span>}
                                         </div>
                                     ))}
                                 </div>

@@ -1,6 +1,6 @@
 import "./hotels.css";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+// import { useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import Navbar from "../../components/Navbar/navbar";
@@ -8,13 +8,16 @@ import Header from "../../components/Header/header";
 import SearchItems from "../../components/SearchItems/searchitems";
 import useFetch from "../../hooks/useFetch";
 import { baseURL } from "../../baseURL/baseURL";
+import { SearchContext } from "../../Context/searchContext";
 
 const Hotels = () => {
-  const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.dates);
+  // const location = useLocation();
+  const { destination, dates, options, dispatch } = useContext(SearchContext);
+  // console.log(destination);
+  const [searchedDestination, setDestination] = useState(destination);
+  const [date, setDate] = useState(dates);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [option, setOptions] = useState(options);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(99999);
   // console.log(options);
@@ -22,15 +25,17 @@ const Hotels = () => {
   const handleOptions = (name, value) => {
     setOptions(prev => {
       return {
-        ...prev, [name]: value ? options[name] = value : options[name],
+        ...prev, [name]: value ? option[name] = value : option[name],
       }
     })
   }
+  console.log(dates)
 
   const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel?city=${destination}&min=${min || 0}&max=${max || 99999}`);
   // console.log( error);
 
   const handleClick = () => {
+    dispatch({ type: 'NEW_SEARCH', payload: { destination: searchedDestination, dates: date, options: option } });
     reFetch();
   };
   return (
@@ -43,14 +48,15 @@ const Hotels = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input value={destination} type="text" onChange={(e) => setDestination(e.target.value)} />
+              <input value={searchedDestination} type="text" onChange={(e) => setDestination(e.target.value)} />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>{`${format(
+              <span className="dateInput" onClick={() => setOpenDate(!openDate)}>{`${format(
                 date[0].startDate,
-                "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+                "dd/MM/yyyy"
+              )} to ${format(date[0].endDate, "dd/MM/yyyy")}`}
+              </span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}
@@ -80,7 +86,7 @@ const Hotels = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    value={options.adults}
+                    value={option.adults}
                     onChange={(e) => handleOptions('adults', e.target.value)}
                   />
                 </div>
@@ -90,7 +96,7 @@ const Hotels = () => {
                     type="number"
                     min={0}
                     className="lsOptionInput"
-                    value={options.children}
+                    value={option.children}
                     onChange={(e) => handleOptions('children', e.target.value)}
                   />
                 </div>
@@ -100,7 +106,7 @@ const Hotels = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    value={options.rooms}
+                    value={option.rooms}
                     onChange={(e) => handleOptions('rooms', e.target.value)}
                   />
                 </div>

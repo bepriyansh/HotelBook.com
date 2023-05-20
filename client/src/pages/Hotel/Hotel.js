@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './hotel.css';
 import MailList from '../../components/MailList/maillist';
 import Footer from '../../components/Footer/footer';
@@ -54,15 +54,11 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber)
   };
-  const targetRef = useRef(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleClick = () => {
     if (user) {
       setOpenModal(true);
-      if (targetRef?.current) {
-        targetRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
     } else {
       navigate("/login");
     }
@@ -134,7 +130,6 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <div ref={targetRef}></div>
         {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
       </div>
       <MailList />

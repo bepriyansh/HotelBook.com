@@ -1,5 +1,5 @@
 import express from 'express';
-import { createHotel, deleteHotel, getAllCityHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotelRooms, getHotels, updateHotel } from '../controllers/hotel.js';
+import { createHotel, deleteHotel, getAllCities, getAllCityHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotelRooms, getHotels, updateHotel } from '../controllers/hotel.js';
 import { verifyAdmin } from '../utils/verification.js';
 
 const router = express.Router();
@@ -24,5 +24,6 @@ router.get('/countByCity', getHotelCountByCity); // Public access
 router.get('/countByType', getHotelCountByType); // Public access
 router.get('/allHotelCountByCity', getAllCityHotelCount); // Public access
 router.get('/rooms/:id', getHotelRooms); // Public access
+router.get('/allCities', getAllCities); // Public access
 
 export default router;

@@ -1,6 +1,6 @@
 import "./hotels.css";
 // import { useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import Navbar from "../../components/Navbar/navbar";
@@ -13,7 +13,13 @@ import { SearchContext } from "../../Context/searchContext";
 const Hotels = () => {
   // const location = useLocation();
   const { destination, dates, options, dispatch } = useContext(SearchContext);
-  // console.log(destination);
+
+  useEffect(() => {
+    console.log(new Date(JSON.parse(localStorage.getItem("searchState")).dates[0].endDate))
+    console.log(new Date(JSON.parse(localStorage.getItem("searchState")).dates[0].startDate))
+    console.log("from useeffect hook === ",destination, dates, options);
+  }, [destination, dates, options])
+  
   const [searchedDestination, setDestination] = useState(destination);
   const [date, setDate] = useState(dates);
   const [openDate, setOpenDate] = useState(false);

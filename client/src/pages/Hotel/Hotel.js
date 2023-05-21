@@ -36,7 +36,7 @@ const Hotel = () => {
     return dayDiff;
   }
 
-  const nights = dayDifference(dates[0]?.endDate, dates[0]?.startDate);
+  const nights = dayDifference(new Date(dates[0]?.endDate), new Date(dates[0]?.startDate));
 
   const handleOpen = (i) => {
     setSlideNumber(i);

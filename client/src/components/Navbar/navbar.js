@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import './navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/authContext';
 
 const Navbar = () => {
@@ -14,6 +14,13 @@ const Navbar = () => {
     }
   }, [user, username]);
 
+  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    setOpenLogOutButton(false);
+    navigate("/login");
+  }
   return (
     <div className='navbar'>
       <div className='navbarContainer'>
@@ -28,7 +35,7 @@ const Navbar = () => {
           {openLogOutButton && <div className='logoutContainer'><div className='logoutWrapper'>
             <div className='logoutText'>Do you want to log out?</div>
             <div className='logoutButtons'>
-              <button onClick={() => setOpenLogOutButton(false)} className='logoutButton'>Log Out</button>
+              <button onClick={logout} className='logoutButton'>Yes</button>
               <button onClick={() => setOpenLogOutButton(false)} className='logoutButton'>No</button>
             </div>
           </div></div>}

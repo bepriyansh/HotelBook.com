@@ -4,6 +4,7 @@
     justify-content: center;
     height: 100vh;
     width: 100vw;
+    background-color: #333;
 }
 
 .loginContainer{
@@ -17,7 +18,7 @@
     border: 1px solid black;
     border-radius: 8px;
     color: white;
-    background-color: rgb(195, 58, 58);
+    background-color: rgba(195, 58, 58);
 }
 .loginContainer>p{
     font-size: 30px;

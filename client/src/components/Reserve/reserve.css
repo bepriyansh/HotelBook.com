@@ -1,11 +1,11 @@
 .reserve {
     z-index: 1;
-    position: fixed;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,14 +20,47 @@
 }
 
 .roomCloseCircle {
+    position: absolute;
     color: black;
     font-size: 35px;
-    position: absolute;
     top: 5px;
     right: 5px;
     cursor: pointer;
 }
 
+.roomItems {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 400px;
+    margin: 8px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ccc;
+}
+.selectRooms{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+    /* margin-right: 18px; */
+    padding: 8px;
+    gap: 5px;
+}
+.room{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.room>input {
+    cursor: pointer;
+}
+.room>input:disabled {
+    cursor:not-allowed;
+}
+.roomNumberLabel{
+    font-size: 12px;
+}
 .reserveTitle {
     font-size: 18px;
     font-weight: 600;
@@ -35,9 +68,7 @@
 
 .rooms {
     margin-top: 5px;
-    padding-right: 15px;
-    height: 550px;
-    width: 335px;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -45,9 +76,11 @@
     scroll-behavior: smooth;
 }
 
+.rooms::-webkit-scrollbar {
+    display: none;
+}
+
 .roomItemInfo {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    background-color: #ccc;
     margin: 10px 0px;
     border-radius: 12px;
     padding: 12px;
@@ -61,36 +94,24 @@
 
 .roomDescription {
     margin-top: 5px;
-    font-size: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
     font-weight: 500;
 }
 
 .roomItemHeadings {
-    margin-top: 5px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.availableRooms {
-    border: 1px solid darkblue;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-
-.roomsAvailablity {
-    display: flex;
-    flex-direction: column;
-}
-
-.roomNumber {
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.unavailableDates {
-    margin-left: 25px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
+}
+
+.roomButton {
+    border: none;
+    padding: 10px 20px;
+    background-color: #0071c2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 20px;
 }

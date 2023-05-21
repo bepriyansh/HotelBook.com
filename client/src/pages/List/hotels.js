@@ -33,11 +33,13 @@ const Hotels = () => {
   const { dispatch } = useContext(SearchContext);
   const handleClick = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    console.log("Dispatched from Hotel Search List's handleClick");
     reFetch();
   };
 
   useEffect(() => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    console.log("Dispatched from Hotel Search List's useEffect");
   }, [dates, destination, dispatch, options])
 
 

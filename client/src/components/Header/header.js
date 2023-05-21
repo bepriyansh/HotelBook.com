@@ -70,13 +70,11 @@ const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
 
   const { dispatch } = useContext(SearchContext);
-  useEffect(() => {
-    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
-  }, [dates, destination, dispatch, options])
   
   
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    console.log("Dispatched from Header's handleSearch");
     navigate("/hotels", { state: { destination, dates, options } });
   };
 

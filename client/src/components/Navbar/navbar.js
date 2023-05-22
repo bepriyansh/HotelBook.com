@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <div className='navbarContainer'>
-        <Link to='/' className='logo'>HotelBook.com</Link>
+        <Link to='/' className='logo'>Booking.com</Link>
         <div className='navItems'>
           {!username && <>
             <button className='navButton'>Register</button>

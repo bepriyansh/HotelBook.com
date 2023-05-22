@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
 import { createError } from "./createError.js";
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async(req, res, next) => {
 
-    const token = req.cookies.access_token;
+    const token = await req.cookies.access_token;
     if (!token)
         return res.status(401).json({ error: "Unauthorized" });
 
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (error, user) => {
+    await jwt.verify(token, process.env.JWT_SECRET_KEY, (error, user) => {
         if (error) return next(createError(403, "Token is not valid"));
         req.user = user;
         next();

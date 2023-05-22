@@ -20,7 +20,7 @@ const corsOptions = {
     origin: 'http://localhost:3000', // allow requests from this origin
     optionsSuccessStatus: 200 // return a 200 status code for preflight requests
   };
-  
+
 // middleware
 app.use(cors(corsOptions));
 app.use(cookieParser());
@@ -33,6 +33,6 @@ app.use('/api/v1/hotel', hotelRoutes);
 
 app.use(errorHandler);
 
-app.listen(8080, () => {
+app.listen(5000, () => {
     console.log('Connected to Backend')
 })

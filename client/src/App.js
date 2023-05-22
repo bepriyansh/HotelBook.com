@@ -4,6 +4,7 @@ import './App.css'
 import Hotels from './pages/List/hotels'
 import Hotel from './pages/Hotel/Hotel'
 import Login from './pages/Login/login'
+import Admin from './pages/Admin/admin'
 
 const App = () => {
   return (
@@ -11,8 +12,9 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/hotels" element={<Hotels/>}/>
-      <Route path="/hotel/:id" element={<Hotel/>}/>
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/hotel/:id" element={<Hotel />} />
+        <Route path="/admin" element={<Admin />} />
     </Routes>
     </BrowserRouter>
   )

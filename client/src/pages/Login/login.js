@@ -12,15 +12,22 @@ const Login = () => {
     });
 
     const navigate = useNavigate();
-    const { user, loading, error, dispatch } = useContext(AuthContext);
+    const { loading, error, dispatch } = useContext(AuthContext);
 
     const handleClick = async (e) => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" });
         try {
             const res = await axios.post(`${baseURL}/auth/login`, credentials);
-            dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-            navigate('/');
+            console.log(document.cookie);
+            const { admin, ...userDetails } = res.data;
+            if (admin) {
+                dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+                navigate('/admin');
+            } else {
+                dispatch({ type: "LOGIN_SUCCESS", payload: userDetails });
+                navigate('/admin');
+            }
         } catch (error) {
             dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
             console.log(error);

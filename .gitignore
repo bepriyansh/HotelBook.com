@@ -10,6 +10,7 @@
 # Ignore dependency directories
 /server/node_modules
 /client/node_modules
+/admin/node_modules
 
 # Ignore build files
 /build

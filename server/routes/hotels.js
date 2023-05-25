@@ -5,7 +5,7 @@ import { verifyAdmin } from '../utils/verification.js';
 const router = express.Router();
 
 // CREATE operation
-router.post('/', verifyAdmin, createHotel); //Only admin can create a new Hotel
+router.post('/:access_token', verifyAdmin, createHotel); //Only admin can create a new Hotel
 
 // READ All
 router.get('/', getHotels); // Public access
@@ -14,10 +14,10 @@ router.get('/', getHotels); // Public access
 router.get('/id/:id', getHotel); // Public access
 
 // UPDATE
-router.patch('/id/:id', verifyAdmin, updateHotel); //Only admin can update a Hotel
+router.patch('/:access_token/id/:id', verifyAdmin, updateHotel); //Only admin can update a Hotel
 
 // DELETE
-router.delete('/id/:id', verifyAdmin, deleteHotel); //Only admin can delete a Hotel
+router.delete('/:access_token/id/:id', verifyAdmin, deleteHotel); //Only admin can delete a Hotel
 
 
 router.get('/countByCity', getHotelCountByCity); // Public access

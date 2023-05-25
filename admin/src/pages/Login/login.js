@@ -10,23 +10,27 @@ const Login = () => {
         username: undefined,
         password: undefined,
     });
-
     const navigate = useNavigate();
     const { loading, error, dispatch } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState(error);
 
     const handleClick = async (e) => {
         e.preventDefault();
         dispatch({ type: "LOGIN_START" });
         try {
             const res = await axios.post(`${baseURL}/auth/login`, credentials);
-            console.log(res.data);
             if (res.data.success) {
                 localStorage.setItem("access_token", res.data.access_token);
                 try {
                     const userInfo = await axios.get(`${baseURL}/user/userInfo/${res.data.access_token}/${res.data.userId}`);
-                    dispatch({ type: "LOGIN_SUCCESS", payload: userInfo.data });
-                    console.log(userInfo.data);
-                    navigate('/');
+                    if (!userInfo.data.isAdmin) {
+                        setErrorMessage({ message: "Unauthorized" });
+                        localStorage.setItem('access_token',null);
+                    } else {
+                        dispatch({ type: "LOGIN_SUCCESS", payload: userInfo.data });
+                        console.log(userInfo.data);
+                        navigate('/hotels');
+                    }
                 } catch (error) {
                     console.log(error);
                 }
@@ -46,7 +50,7 @@ const Login = () => {
                 <p>Login</p>
                 <input onChange={handleChange} type='text' placeholder='username' className='loginInput' id='username' />
                 <input onChange={handleChange} type='password' placeholder='password' className='loginInput' id='password' />
-                {error && <span className='errorMessage'>{error.message}</span>}
+                {errorMessage && <span className='errorMessage'>{errorMessage.message}</span>}
                 <button disabled={loading} onClick={handleClick} className='loginButton'>Login</button>
             </div>
         </div>

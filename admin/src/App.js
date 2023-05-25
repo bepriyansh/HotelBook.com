@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home/home'
 import './App.css'
-import Hotels from './pages/List/hotels'
-import Hotel from './pages/Hotel/Hotel'
 import Login from './pages/Login/login'
-import User from './pages/User/user'
+import Home from './pages/Home/home'
+import Hotels from './pages/Hotels/hotels'
+import Users from './pages/Users/users'
+import Dashboard from './pages/Dashboard/dashboard'
+import Update from './pages/Update/update'
 
 const App = () => {
   return (
@@ -12,10 +13,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/hotel/:id" element={<Hotel />} />
 
-        <Route path="/user" element={<User />} />
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/hotels/update/:hotelId" element={<Update />} />
       </Routes>
     </BrowserRouter>
   )

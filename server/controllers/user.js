@@ -17,6 +17,7 @@ export const getUser = async (req, res, next) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+        // const { password, isAdmin, ...otherDetails } = user;
         res.json(user);
     } catch (error) {
         next(error);

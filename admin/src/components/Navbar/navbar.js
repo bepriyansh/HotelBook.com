@@ -24,15 +24,18 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <div className='navbarContainer'>
-        <Link to='/' className='logo'>HotelBook.com</Link>
+        <div className='logoArea'>
+          <Link to='/' className='logo'>HotelBook.com</Link>
+          <div className='logoAdmin'>Admin controls</div>
+        </div>
         <div className='navItems'>
           {!username && <>
             <button className='navButton'>Register</button>
             <Link to='/login' className='navButton'>Login</Link>
           </>
           }
-          {username && <Link to='/user' className='navButton'>Hello <b>{username}</b></Link>}
-          {/* {username && <button onClick={() => setOpenLogOutButton(!openLogOutButton)} className='navButton'>Hello <b>{username}</b></button>} */}
+          {/* {username && <Link to='/user' className='navButton'>Hello <b>{username}</b></Link>} */}
+          {username && <button onClick={() => setOpenLogOutButton(!openLogOutButton)} className='navButton'>Hello <b>{username}</b></button>}
           {openLogOutButton && <div className='logoutContainer'><div className='logoutWrapper'>
             <div className='logoutText'>Do you want to log out?</div>
             <div className='logoutButtons'>

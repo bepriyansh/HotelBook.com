@@ -6,7 +6,7 @@ const router = Express.Router();
 
 
 // CREATE 
-router.post('/:hotelId', verifyAdmin, createRoom);
+router.post('/:access_token/:hotelId', verifyAdmin, createRoom);
 
 // READ All
 router.get('/', getAllRooms);
@@ -15,12 +15,12 @@ router.get('/', getAllRooms);
 router.get('/:hotelId/:id', getRoom);
 
 // UPDATE Room
-router.patch('/:id', verifyAdmin, updateRoom);
+router.patch('/:access_token/:id', verifyAdmin, updateRoom);
 
 // UPDATE Room Availability
 router.patch('/availability/:id', updateRoomAvailability);
 
 // DELETE
-router.delete('/:hotelId/:id', verifyAdmin, deleteRoom);
+router.delete('/:access_token/:hotelId/:id', verifyAdmin, deleteRoom);
 
 export default router;

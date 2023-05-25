@@ -16,15 +16,15 @@ const router = Express.Router();
 // });
 
 // READ All
-router.get('/', verifyAdmin, getUsers); //Only admin can access all users
+router.get('/:access_token', verifyAdmin, getUsers); //Only admin can access all users
 
 // READ One by Id
-router.get('/:id', verifyUser, getUser);
+router.get('/userInfo/:access_token/:id', verifyUser, getUser);
 
 // UPDATE
-router.patch('/:id', verifyUser, updateUser); //Only user can update it's account
+router.patch('/:access_token/:id', verifyUser, updateUser); //Only user can update it's account
 
 // DELETE
-router.delete('/:id', verifyUser, deleteUser); //Only user can delete it's account
+router.delete('/:access_token/:id', verifyUser, deleteUser); //Only user can delete it's account
 
 export default router;

@@ -23,7 +23,7 @@ const CreateRoom = ({hotelId}) => {
 
         const access_token = localStorage.getItem('access_token');
         try {
-            await axios.post(`${baseURL}/room/${access_token}/${hotelId}`, newRoom); 
+            await axios.post(`${baseURL}/room/token/${access_token}/${hotelId}`, newRoom); 
             console.log("Room created successfully!");
             // Reset form values
             setTitle("");

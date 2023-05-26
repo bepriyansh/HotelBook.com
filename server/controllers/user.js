@@ -51,3 +51,28 @@ export const deleteUser = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getTotalUserCount = async (req, res, next) => {
+    try {
+        const count = await User.countDocuments({});
+        res.json({ count });
+    } catch (error) {
+        next(error);
+    }
+}
+export const getCurrentMonthNewUserCount = async (req, res, next) => {
+    const currentDate = new Date();
+    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+    try {
+        const count = await User.countDocuments({
+            createdAt: {
+                $gte: startOfMonth,         // gte :: greater than or equal to
+                $lte: currentDate            //lte :: less than or equal to
+            }
+        });
+        res.json({ count });
+    } catch (error) {
+        next(error);
+    }
+}

@@ -5,7 +5,7 @@ import axios from "axios";
 
 const UpdateRoom = ({ hotelId, roomId, i }) => {
     const { data, loading, reFetch } = useFetch(
-        `${baseURL}/room/${hotelId}/${roomId}`
+        `${baseURL}/room/rooms/${hotelId}/${roomId}`
     );
 
     const [title, setTitle] = useState("");
@@ -31,7 +31,7 @@ const UpdateRoom = ({ hotelId, roomId, i }) => {
         const access_token = localStorage.getItem("access_token");
         try {
             if (action === "update") {
-                await axios.patch(`${baseURL}/room/${access_token}/${roomId}`, {
+                await axios.patch(`${baseURL}/room/token/${access_token}/${roomId}`, {
                     title,
                     description,
                     price,
@@ -41,7 +41,7 @@ const UpdateRoom = ({ hotelId, roomId, i }) => {
                 console.log("Room updated successfully");
             } else if (action === "delete") {
                 await axios.delete(
-                    `${baseURL}/room/${access_token}/${hotelId}/${roomId}`
+                    `${baseURL}/room/token/${access_token}/${hotelId}/${roomId}`
                 );
                 reFetch();
                 console.log("Room deleted successfully");

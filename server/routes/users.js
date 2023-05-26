@@ -1,5 +1,5 @@
 import Express from "express";
-import { deleteUser, getUser, getUsers, updateUser } from "../controllers/user.js";
+import { deleteUser, getCurrentMonthNewUserCount, getTotalUserCount, getUser, getUsers, updateUser } from "../controllers/user.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verification.js";
 const router = Express.Router();
 
@@ -26,5 +26,10 @@ router.patch('/:access_token/:id', verifyUser, updateUser); //Only user can upda
 
 // DELETE
 router.delete('/:access_token/:id', verifyUser, deleteUser); //Only user can delete it's account
+
+
+
+router.get('/totalusers/:access_token', verifyAdmin, getTotalUserCount);
+router.get('/newusers/:access_token', verifyAdmin, getCurrentMonthNewUserCount);
 
 export default router;

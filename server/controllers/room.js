@@ -72,7 +72,7 @@ export const getRoom = async (req, res, next) => {
         if (!room) {
             return res.status(404).json("Room not found");
         }
-        
+
         res.status(200).json(room);
     } catch (err) {
         next(err);
@@ -87,3 +87,34 @@ export const getAllRooms = async (req, res, next) => {
         next(err);
     }
 };
+
+
+export const getBookingCount = async (req, res, next) => {
+    const currentDate = new Date();
+
+    try {
+        // Perform aggregation pipeline to count unavailable dates in the future for all rooms
+        const count = await Room.aggregate([
+            {
+                $unwind: '$roomNumbers', // Deconstruct the roomNumbers array
+            },
+            {
+                $unwind: '$roomNumbers.unavailableDates', // Deconstruct the unavailableDates array
+            },
+            {
+                $match: {
+                    'roomNumbers.unavailableDates': { $gte: currentDate }, // Filter for future unavailable dates
+                },
+            },
+            {
+                $count: 'unavailableDatesCount', // Count the matching documents
+            },
+        ]);
+
+        const unavailableDatesCount = count[0]?.unavailableDatesCount || 0;
+
+        res.json({ count: unavailableDatesCount }); // Send the count as JSON response
+    } catch (error) {
+        next(error);
+    }
+}

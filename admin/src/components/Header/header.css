@@ -12,6 +12,8 @@
 
 nav {
     display: flex;
+    width: 100%;
+    max-width: 1024px;
     align-items: center;
     justify-content: center;
 }
@@ -42,6 +44,101 @@ nav ul li.active a {
     color: #ffffff;
 }
 
+.headerSearchInput {
+    position: relative;
+    background-color: wheat;
+    color: black;
+    font-size: 14px;
+    width: max-content;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    outline: none;
+}
+
+.searchSuggestionsContainerWrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    top: 45px;
+    right: 5px;
+    width: 455px;
+
+}
+
+.searchSuggestionsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #fff;
+    padding: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    width: max-content;
+
+}
+
+.searchSuggestionList {
+    /* border: 1px solid #333; */
+    z-index: 5;
+    text-decoration: none;
+    margin: 0;
+    padding: 3px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255);
+    list-style: none;
+    width: 187px;
+}
+
+.searchSuggestion {
+    color: black;
+    margin: 0px;
+    margin-bottom: 3px;
+    padding: 3px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+}
+.searchSuggestion:hover{
+    background-color: #ccc;
+    border-radius: 8px;
+}
+
+.suggestion {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.suggestionHeading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 6px 0px;
+    margin: 0;
+    margin-bottom: 3px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 12px;
+}
+
 /* Media Queries for Mobile View */
 @media (max-width: 425px) {
     nav ul li {
@@ -51,5 +148,13 @@ nav ul li.active a {
 
     nav ul li.active a {
         border-bottom: none;
+    }
+
+    .searchSuggestionList {
+        top: 69px;
+    }
+
+    .search {
+        flex-direction: column;
     }
 }

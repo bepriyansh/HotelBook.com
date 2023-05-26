@@ -17,6 +17,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
   const logout = () => {
+    localStorage.setItem('access_token',null);
     dispatch({ type: "LOGOUT" });
     setOpenLogOutButton(false);
     navigate("/login");

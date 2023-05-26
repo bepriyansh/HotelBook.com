@@ -5,6 +5,7 @@ import useFetch from '../../hooks/useFetch';
 import './hotels.css';
 import axios from 'axios';
 import { useState } from 'react';
+import Header from '../../components/Header/header';
 
 const Hotels = () => {
   const navigate = useNavigate();
@@ -43,44 +44,61 @@ const Hotels = () => {
   return (
     <div className='hotelPage'>
       <Navbar />
+      <Header/>
       <div className='content'>
-      {
-        loading ? <h1>Loading...</h1> :
-          <div>
-            {data?.map((hotel) => {
-              return (
-                <div className='hotelContainer' key={hotel._id}>
-                  <Link to='/'>
-                    <img className='hotelImage' src={hotel.photos[0] || "https://cdn3.iconfinder.com/data/icons/map/500/hotel-512.png"} alt='' />
-                  </Link>
-                  <Link to='/' className='infoContainer'>
-                    <div className='hotelName'>{hotel.name}</div>
-                    <div className='hotelType'>{hotel.type}</div>
-                    <div className='hotelTitle'>{hotel.title}</div>
-                    <div className='hotelAddress'>{hotel.address}</div>
-                  </Link>
-                  <div className='buttonContainer'>
-                    <button onClick={() => handleUpdate(hotel._id)} className='updateButton'>Update</button>
-                    <button onClick={() => handleOpenDeleteBox(hotel._id)} className='deleteButton'>Delete</button>
-                  </div>
-                </div>)
-            })}</div>
-        }
+        {loading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <div className='hotelContainer'>
+            {data?.map((hotel) => (
+              <div className='hotelCard' key={hotel._id}>
+                <Link className='hotelImageWrapper' to='/'>
+                  <img
+                    className='hotelImage'
+                    src={hotel.photos[0] || 'https://cdn3.iconfinder.com/data/icons/map/500/hotel-512.png'}
+                    alt=''
+                  />
+                </Link>
+                <Link to='/' className='infoContainer'>
+                  <div className='hotelName'>{hotel.name}</div>
+                  <div className='hotelType'>{hotel.type}</div>
+                  <div className='hotelTitle'>{hotel.title}</div>
+                  <div className='hotelAddress'>{hotel.address}</div>
+                </Link>
+                <div className='buttonContainer'>
+                  <button onClick={() => handleUpdate(hotel._id)} className='updateButton'>
+                    Update
+                  </button>
+                  <button onClick={() => handleOpenDeleteBox(hotel._id)} className='deleteButton'>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      {alert &&
+      {alert && (
         <div className='deleteBox'>
           <div className='deleteBoxWrapper'>
             <p className='alert'>Do you want to delete?</p>
             <p className='smallAlert'>This can't be undone.</p>
+            <div className='buttonContainerWrapper'>
             <div className='buttonContainer'>
-              <button onClick={() => handleDelete()} className='deleteButton'>Delete</button>
-              <button onClick={() => handleCancel()} className='cancelButton'>No</button>
+              <button onClick={() => handleDelete()} className='deleteButton'>
+                Delete
+              </button>
+              <button onClick={() => handleCancel()} className='cancelButton'>
+                No
+              </button>
+              </div>
             </div>
           </div>
         </div>
-      }
+      )}
     </div>
-  )
+  );
+
 }
 
 export default Hotels

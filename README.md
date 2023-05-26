@@ -16,7 +16,7 @@ This is a MERN (MongoDB, Express, React, Node.js) project for a Hotel Booking Sy
 ### Admin Side
 
 - Hotel Management: Admin can create, update, and delete hotel information.
-- Room Management: Admin can add and delete rooms for each hotel.
+- Room Management: Admin can add, upadate and delete rooms for each hotel.
 - Admin Profiles: Admin can create additional admin profiles.
 - User Profile Deletion: Admin can delete user profiles.
 

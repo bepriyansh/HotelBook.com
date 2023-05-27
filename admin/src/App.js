@@ -5,6 +5,7 @@ import Hotels from './pages/Hotels/hotels'
 import Users from './pages/Users/users'
 import Dashboard from './pages/Dashboard/dashboard'
 import Update from './pages/Update/update'
+import CreateHotel from './pages/CreateHotel/createHotel'
 
 const App = () => {
   return (
@@ -15,7 +16,10 @@ const App = () => {
 
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/users" element={<Users />} />
+        
+        <Route path="/create-hotel" element={<CreateHotel />} />
 
+        
         <Route path="/hotels/update/:hotelId" element={<Update />} />
       </Routes>
     </BrowserRouter>

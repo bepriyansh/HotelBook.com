@@ -1,5 +1,5 @@
 import express from 'express';
-import { createHotel, deleteHotel, getAllCities, getAllCityHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotelRooms, getHotels, updateHotel } from '../controllers/hotel.js';
+import { createHotel, deleteHotel, getAllCities, getAllCityHotelCount, getCurrentMonthNewHotelCount, getHotel, getHotelCountByCity, getHotelCountByType, getHotelRooms, getHotels, getTotalHotelCount, updateHotel } from '../controllers/hotel.js';
 import { verifyAdmin } from '../utils/verification.js';
 
 const router = express.Router();
@@ -18,6 +18,9 @@ router.patch('/:access_token/id/:id', verifyAdmin, updateHotel); //Only admin ca
 
 // DELETE
 router.delete('/:access_token/id/:id', verifyAdmin, deleteHotel); //Only admin can delete a Hotel
+
+router.get('/:access_token/totalHotels', verifyAdmin, getTotalHotelCount);
+router.get('/:access_token/newHotels', verifyAdmin, getCurrentMonthNewHotelCount);
 
 
 router.get('/countByCity', getHotelCountByCity); // Public access

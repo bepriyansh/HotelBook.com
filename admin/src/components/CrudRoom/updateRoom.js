@@ -63,94 +63,85 @@ const UpdateRoom = ({ hotelId, roomId, i }) => {
     };
 
     return (
-        <div className="updateContainer">
-            {loading ? (
-                <h1>Loading...</h1>
-            ) : (
-                <div>
-                    <div className="updateInputs">
-                        <div className="title">Room {i + 1} :</div>
+        <div className="crud-hotel">
+            {loading ? <h1>Loading...</h1> : (
+                <div className="crud-hotel__form">
+                    <p className="crud-hotel__title">Room {i + 1}</p>
 
-                        <div className="inputFields">
-                            <label>Title : </label>
-                            <input
-                                type="text"
-                                value={title}
-                                onChange={(e) => handleChange(e, setTitle)}
-                            />
-                        </div>
-                        <div className="inputFields">
-                            <label>Max People : </label>
-                            <input
-                                type="number"
-                                value={maxPeople}
-                                onChange={(e) => handleChange(e, setMaxPeople)}
-                            />
-                        </div>
-                        <div className="inputFields">
-                            <label>Description : </label>
-                            <textarea
-                                type="text"
-                                value={description}
-                                onChange={(e) => handleChange(e, setDescription)}
-                            />
-                        </div>
-                        <div className="inputFields">
-                            <label>Price : </label>
-                            <input
-                                type="number"
-                                value={price}
-                                onChange={(e) => handleChange(e, setPrice)}
-                            />
-                        </div>
-                        <div className="updateButtonWrapper">
-                            <p className="updateText">Update Now : </p>
-                            <button
-                                onClick={() => handleOpenAlert("update")}
-                                className="updateButton"
-                            >
-                                Update
-                            </button>
-                            <button
-                                onClick={() => handleOpenAlert("delete")}
-                                className="deleteButton"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                        {alert && (
-                            <div className="deleteBox">
-                                <div className="deleteBoxWrapper">
-                                    <p className="alert">Do you want to {action}?</p>
-                                    <p className="smallAlert">This can't be undone.</p>
-                                    <div className='buttonContainerWrapper'>
-                                        <div className="buttonContainer">
-                                            {action === "delete" && (
-                                                <button
-                                                    onClick={() => handleAction()}
-                                                    className="deleteButton"
-                                                >
-                                                    Delete
-                                                </button>
-                                            )}
-                                            {action === "update" && (
-                                                <button
-                                                    onClick={() => handleAction()}
-                                                    className="updateButton"
-                                                >
-                                                    Update
-                                                </button>
-                                            )}
-                                            <button onClick={handleCancel} className="cancelButton">
-                                                No
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        )}
+                    <label className="crud-hotel__label">Title : </label>
+                    <input
+                        className="crud-hotel__input" type="text"
+                        value={title}
+                        onChange={(e) => handleChange(e, setTitle)}
+                    />
+                    <label className="crud-hotel__label">Max People : </label>
+                    <input
+                        className="crud-hotel__input"
+                        type="number"
+                        value={maxPeople}
+                        onChange={(e) => handleChange(e, setMaxPeople)}
+                    />
+                    <label className="crud-hotel__label">Description : </label>
+                    <textarea
+                        className="crud-hotel__textarea"
+                        type="text"
+                        value={description}
+                        onChange={(e) => handleChange(e, setDescription)}
+                    />
+                    <label className="crud-hotel__label">Price : </label>
+                    <input
+                        className="crud-hotel__input"
+                        type="number"
+                        value={price}
+                        onChange={(e) => handleChange(e, setPrice)}
+                    />
+                    <div className="updateButtonWrapper">
+                        <p className="updateText">Update Now : </p>
+                        <button
+                            onClick={() => handleOpenAlert("update")}
+                            className="updateButton"
+                        >
+                            Update
+                        </button>
+                        <button
+                            onClick={() => handleOpenAlert("delete")}
+                            className="deleteButton"
+                        >
+                            Delete
+                        </button>
                     </div>
+                    {alert && (
+                        <div className="deleteBox">
+                            <div className="deleteBoxWrapper">
+                                <p className="alert">Do you want to {action}?</p>
+                                <p className="smallAlert">This can't be undone.</p>
+                                <div className='buttonContainerWrapper'>
+                                    <div className="buttonContainer">
+                                        {action === "delete" && (
+                                            <button
+                                                onClick={() => handleAction()}
+                                                className="deleteButton"
+                                            >
+                                                Delete
+                                            </button>
+                                        )}
+                                        {action === "update" && (
+                                            <button
+                                                onClick={() => handleAction()}
+                                                className="updateButton"
+                                            >
+                                                Update
+                                            </button>
+                                        )}
+                                        <button onClick={handleCancel} className="cancelButton">
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

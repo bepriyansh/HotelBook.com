@@ -20,7 +20,6 @@ export const getHotels = async (req, res, next) => {
             ...otherDetails,
             cheapestPrice: { $gt: min || 0, $lt: max || 999999 }
         }).limit(limit);
-        console.log("Total hotels = ", hotels.length);
         res.json(hotels);
     } catch (error) {
         next(error);
@@ -157,6 +156,34 @@ export const getAllCities = async (req, res, next) => {
     try {
         const cities = await Hotel.distinct('city');
         res.json(cities);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const getTotalHotelCount = async (req, res, next) => {
+    try {
+        const count = await Hotel.countDocuments({});
+        res.json({ count });
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const getCurrentMonthNewHotelCount = async (req, res, next) => {
+    const currentDate = new Date();
+    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+    try {
+        const count = await Hotel.countDocuments({
+            createdAt: {
+                $gte: startOfMonth,         // gte :: greater than or equal to
+                $lte: currentDate            //lte :: less than or equal to
+            }
+        });
+        res.json({ count });
     } catch (error) {
         next(error);
     }

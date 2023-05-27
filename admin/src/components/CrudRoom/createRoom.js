@@ -3,7 +3,7 @@ import axios from "axios";
 import './createRoom.css';
 import { baseURL } from "../../baseURL/baseURL";
 
-const CreateRoom = ({hotelId}) => {
+const CreateRoom = ({ hotelId }) => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState('');
     const [maxPeople, setMaxPeople] = useState('');
@@ -23,7 +23,7 @@ const CreateRoom = ({hotelId}) => {
 
         const access_token = localStorage.getItem('access_token');
         try {
-            await axios.post(`${baseURL}/room/token/${access_token}/${hotelId}`, newRoom); 
+            await axios.post(`${baseURL}/room/token/${access_token}/${hotelId}`, newRoom);
             console.log("Room created successfully!");
             // Reset form values
             setTitle("");
@@ -53,45 +53,51 @@ const CreateRoom = ({hotelId}) => {
     };
 
     return (
-        <div className="updateContainer">
-            <form className="updateInputs" onSubmit={handleSubmit}>
-                <div className="inputFields">
-                    <label>Title : </label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="inputFields">
-                    <label>Price : </label>
-                    <input
-                        type="number"
-                        value={price}
-                        min={0}
-                        onChange={(e) => setPrice(Number(e.target.value))}
-                        required
-                    />
-                </div>
-                <div className="inputFields">
-                    <label>Max People : </label>
-                    <input
-                        type="number"
-                        value={maxPeople}
-                        min={1}
-                        onChange={(e) => setMaxPeople(Number(e.target.value))}
-                        required
-                    />
-                </div>
-                <div className="inputFields">
-                    <label>Description : </label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </div>
+        <div className="crud-hotel">
+            <p className='crud-hotel__title'>Create Room</p>
+            <form className="crud-hotel__form" onSubmit={handleSubmit}>
+                <label className="crud-hotel__label" htmlFor="name">Title : </label>
+                <input
+                    className="crud-hotel__input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
+                <label className="crud-hotel__label" htmlFor="name">Price : </label>
+                <input
+                    className="crud-hotel__input"
+                    type="number"
+                    id="name"
+                    name="name"
+                    value={price}
+                    min={0}
+                    onChange={(e) => setPrice(Number(e.target.value))}
+                    required
+                />
+                <label className="crud-hotel__label" htmlFor="name">Max People : </label>
+                <input
+                    className="crud-hotel__input"
+                    type="number"
+                    id="name"
+                    name="name"
+                    value={maxPeople}
+                    min={1}
+                    onChange={(e) => setMaxPeople(Number(e.target.value))}
+                    required
+                />
+                <label className="crud-hotel__label" htmlFor="name">Description : </label>
+                <textarea
+                    className="crud-hotel__textarea"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
                 <div className="bottomContainerWrapper" >
                     <div className="bottomContainer">
                         <label>Room Numbers : </label>
@@ -119,7 +125,7 @@ const CreateRoom = ({hotelId}) => {
                 </div>
                 <div className="createButtonContainer">
                     <p>Create this room : </p>
-                <button type="submit" className="createButton">Create</button>
+                    <button type="submit" className="createButton">Create</button>
                 </div>
             </form>
         </div>

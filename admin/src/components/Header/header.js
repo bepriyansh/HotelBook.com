@@ -10,7 +10,7 @@ const Header = () => {
     const [hotels, setHotels] = useState([]);
     const [users, setUsers] = useState([]);
 
-    const getData = async () => { 
+    const getData = async () => {
         const access_token = localStorage.getItem('access_token');
         try {
             const hotelResponse = await axios.get(`${baseURL}/hotel`);
@@ -24,7 +24,7 @@ const Header = () => {
     useEffect(() => {
         getData();
     }, [])
-    
+
     const [searchQuery, setSearchQuery] = useState('');
     const [userSuggestions, setUserSuggestions] = useState([]);
     const [hotelSuggestions, setHotelSuggestions] = useState([]);
@@ -76,42 +76,43 @@ const Header = () => {
                         />
                         {/* <button className='createButton'>search</button> */}
                     </div>
-                    { openSuggestions && ((userSuggestions.length > 0) || (hotelSuggestions.length > 0))  && <div className='searchSuggestionsContainerWrapper'>
-                        <div className='searchSuggestionsContainer'>
-                            {(userSuggestions.length > 0) && (
-                                <div className="suggestions">
-                                    <p className='suggestionHeading'>Users</p>
-                                    <ul className="searchSuggestionList">
-                                        {userSuggestions.slice(0,10).map((user,i) => (
-                                            <li
-                                                key={i}
-                                                onClick={() => handleSuggestionClick(user)}
-                                                className="searchSuggestion"
-                                            >
-                                                {user.username}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                            {(hotelSuggestions.length > 0) && (
-                                <div className="suggestions">
-                                    <p className='suggestionHeading'>Hotels</p>
-                                    <ul className="searchSuggestionList">
-                                        {hotelSuggestions.slice(0, 10).map((hotel,i) => (
-                                            <li
-                                                key={i}
-                                                onClick={() => handleSuggestionClick(hotel)}
-                                                className="searchSuggestion"
-                                            >
-                                                {hotel.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
-                    </div>}
+                    {openSuggestions && ((userSuggestions.length > 0) || (hotelSuggestions.length > 0)) &&
+                        <div className='searchSuggestionsContainerWrapper'>
+                            <div className='searchSuggestionsContainer'>
+                                {(userSuggestions.length > 0) && (
+                                    <div className="suggestions">
+                                        <p className='suggestionHeading'>Users</p>
+                                        <ul className="searchSuggestionList">
+                                            {userSuggestions.slice(0, 10).map((user, i) => (
+                                                <li
+                                                    key={i}
+                                                    onClick={() => handleSuggestionClick(user)}
+                                                    className="searchSuggestion"
+                                                >
+                                                    {user.username}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                                {(hotelSuggestions.length > 0) && (
+                                    <div className="suggestions">
+                                        <p className='suggestionHeading'>Hotels</p>
+                                        <ul className="searchSuggestionList">
+                                            {hotelSuggestions.slice(0, 10).map((hotel, i) => (
+                                                <li
+                                                    key={i}
+                                                    onClick={() => handleSuggestionClick(hotel)}
+                                                    className="searchSuggestion"
+                                                >
+                                                    {hotel.name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </div>}
                 </div>
             </nav>
         </div>

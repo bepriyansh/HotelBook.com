@@ -107,13 +107,13 @@ export const getBookingCount = async (req, res, next) => {
                 },
             },
             {
-                $count: 'unavailableDatesCount', // Count the matching documents
+                $count: 'unavailableDatesCount', //  counts the matching documents and assigns the count to the field unavailableDatesCount
             },
         ]);
 
         const unavailableDatesCount = count[0]?.unavailableDatesCount || 0;
 
-        res.json({ count: unavailableDatesCount }); // Send the count as JSON response
+        res.json({ count: unavailableDatesCount });
     } catch (error) {
         next(error);
     }

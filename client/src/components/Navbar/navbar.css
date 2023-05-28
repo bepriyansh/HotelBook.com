@@ -4,7 +4,8 @@
     display: flex;
     padding-top: 8px;
     justify-content: center;
-    background-color: rgb(195, 58, 58);
+    background-color: rgba(85, 0, 255, 0.8);
+    backdrop-filter: blur(10px);
 }
 
 .navbarContainer {

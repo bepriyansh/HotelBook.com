@@ -1,0 +1,5 @@
+.user-page {
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.746), rgb(72, 51, 211), rgba(0, 0, 0, 0.672));
+}

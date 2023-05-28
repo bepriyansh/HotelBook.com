@@ -4,7 +4,7 @@ import './users.css';
 
 const Users = () => {
     return (
-        <div>
+        <div className='user-page'>
             <Navbar />
             <Header/>
             Users

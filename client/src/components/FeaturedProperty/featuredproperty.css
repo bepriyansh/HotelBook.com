@@ -16,12 +16,13 @@
     border-radius: 12px;
     padding: 5px 5px 15px 5px;
     transition: 80ms ease-in-out;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(200, 255, 0, 0.3);
   }
   .fpItem:hover{
     transform: scale(1.03);
     transition: 100ms ease-in-out;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.65);
+    box-shadow: 0px 0px 15px rgb(200, 255, 0, 0.5);
   }
   .fpImg{
     width: 100%;

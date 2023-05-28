@@ -1,6 +1,7 @@
 .header {
     width: 100%;
-    background-color: rgb(195, 58, 58);
+    background-color: rgba(85, 0, 255, 0.8);
+    backdrop-filter: blur(10px);
     height: max-content;
     color: white;
     display: flex;
@@ -57,7 +58,7 @@
 
 .headerSearch {
     background-color: rgb(245, 222, 179, 0.1);
-    border: 2px solid wheat;
+    border: 2px solid rgba(245, 222, 179, 0.6);
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
@@ -87,7 +88,7 @@
 
 
 .headerSearchButton {
-    border: 2px solid wheat;
+    border: 2px solid rgba(245, 222, 179, 0.6);
     border-radius: 8px;
     padding: 10px;
     font-weight: 500;
@@ -98,7 +99,7 @@
 }
 
 .headerSearchInput {
-    background-color: wheat;
+    background-color: rgba(245, 222, 179, 0.9);
     color: black;
     font-size: 14px;
     width: max-content;

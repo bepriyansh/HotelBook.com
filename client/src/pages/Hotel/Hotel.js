@@ -64,7 +64,7 @@ const Hotel = () => {
     }
   };
   return (
-    <div>
+    <div className='hotelPage'>
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">

@@ -1,12 +1,14 @@
 .searchItem {
-    border: 1px solid lightgray;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    color: white;
     padding: 10px;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   }
   
   .siImg {
@@ -27,7 +29,7 @@
   
   .siTitle {
     font-size: 20px;
-    color: #0071c2;
+    color: #e5ed53;
   }
   
   .siDistance {
@@ -54,13 +56,13 @@
   
   .siCancelOp{
     font-size: 12px;
-    color: #008009;
+    color: #e5ed53;
     font-weight: bold;
   }
   
   .siCancelOpSubtitle{
     font-size: 12px;
-    color: #008009;
+    color: #5fd7e4;
   }
   
   .siDetails {
@@ -100,7 +102,7 @@
   
   .siTaxOp{
     font-size: 12px;
-    color: gray;
+    color: #53b4ed;
   }
   
   .siCheckButton{

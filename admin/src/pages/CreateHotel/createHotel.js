@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './createHotel.css';
 import Navbar from '../../components/Navbar/navbar';
 import { baseURL } from '../../baseURL/baseURL';

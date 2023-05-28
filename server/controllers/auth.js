@@ -4,18 +4,24 @@ import jwt from "jsonwebtoken";
 import { createError } from '../utils/createError.js';
 
 export const register = async (req, res, next) => {
-    var { username, password, ...otherDetails } = req.body;
+    var { username, password, email, ...otherDetails } = req.body;
+    if (!(username && password && email))
+        return next(createError(404, 'Please fill all the fields properly'));
     const salt = bcrypt.genSaltSync(10);
     password = bcrypt.hashSync(password);
 
     try {
 
         const existingUser = await User.findOne({ username });
+        const userWithRegisteredEmail = await User.findOne({ email });
+
         if (existingUser)
-            return res.status(400).json({ message: 'User already exists' });
+            return next(createError(400, 'Username already in use'));
 
+        if (userWithRegisteredEmail)
+            return next(createError(400, 'Email already registered'));
 
-        const user = new User({ username, password, ...otherDetails });
+        const user = new User({ username, password, email, ...otherDetails });
         await user.save();
 
         const access_token = jwt.sign({ id: user._id, isAdmin: user.isAdmin },
@@ -30,12 +36,15 @@ export const register = async (req, res, next) => {
 
 
 export const login = async (req, res, next) => {
-    
+
 
     try {
-        const user = await User.findOne({ username: req.body.username });
-        if (!user)
-            return next(createError(404, 'User Not Found'));
+        let user = await User.findOne({ username: req.body.username });
+        if (!user) {
+            user = await User.findOne({ email: req.body.email });
+            if (!user)
+                return next(createError(404, 'User Not Found'));
+        }
 
         if (!req.body.password)
             return next(createError(404, 'Password Required'));

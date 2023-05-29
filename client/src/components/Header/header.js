@@ -74,7 +74,7 @@ const Header = ({ type }) => {
   
   const handleSearch = () => {
     dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
-    console.log("Dispatched from Header's handleSearch");
+    // console.log("Dispatched from Header's handleSearch");
     navigate("/hotels", { state: { destination, dates, options } });
   };
 

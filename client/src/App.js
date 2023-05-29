@@ -4,8 +4,8 @@ import './App.css'
 import Hotels from './pages/List/hotels'
 import Hotel from './pages/Hotel/Hotel'
 import Login from './pages/Login/login'
-import User from './pages/User/user'
 import SignUp from './pages/SignUp/signUp'
+import UserProfile from './pages/User/user'
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/hotel/:id" element={<Hotel />} />
 
-        <Route path="/user" element={<User />} />
+        <Route path="/user/:id" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   )

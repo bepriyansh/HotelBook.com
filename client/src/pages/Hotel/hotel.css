@@ -2,7 +2,7 @@
   min-height: 100vh;
   color: white;
   background-color: rgba(255, 255, 255, 0.9);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.746), rgb(72, 51, 211), rgba(0, 0, 0, 0.672));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgb(72, 51, 211), rgba(0, 0, 0, 0.6));
 }
 
 .hotelContainer {
@@ -27,7 +27,7 @@
   right: 0;
   border: none;
   padding: 10px 20px;
-  background-color: #0071c2;
+  background-color: #0031c2;
   color: white;
   font-weight: bold;
   border-radius: 5px;
@@ -48,12 +48,12 @@
 }
 
 .hotelDistance {
-  color: #b7cf00;
+  color: #e1ff00;
   font-weight: 500;
 }
 
 .hotelPriceHighlight {
-  color: #00ab2e;
+  /* color: #19e1c0; */
   font-weight: 500;
 }
 

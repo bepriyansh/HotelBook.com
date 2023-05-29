@@ -95,7 +95,7 @@ const Login = () => {
                     onClick={handleGoogleLogin}
                 >
                     <FcGoogle />
-                    Sign up with Google
+                    Sign in with Google
                 </button>
             </div>
         </div>

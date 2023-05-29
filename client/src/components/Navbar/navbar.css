@@ -23,8 +23,16 @@
     font-weight: 600;
     font-size: 23px;
 }
-
-.navButton {
+.navItems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navButton,
+.navButton-userLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     border: 2px solid wheat;
     border-radius: 8px;
@@ -36,6 +44,18 @@
     color: white;
     background-color: rgb(245, 222, 179, 0.05);
     position: relative;
+}
+.navButton-userLogo{
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+}
+.userLogoButton{
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .logoutContainer {

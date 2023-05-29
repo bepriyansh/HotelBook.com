@@ -20,7 +20,7 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`${baseURL}/hotel/id/${id}`);
+  const { data,} = useFetch(`${baseURL}/hotel/id/${id}`);
   // console.log(data, "Loading = ", loading, "Error = ", error);
 
 
@@ -98,7 +98,7 @@ const Hotel = () => {
             Excellent location – {data.distance}
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over ₹{data.cheapestPrice} at this property and get a free airport taxi
+            Book a stay over ₹{data.cheapestPrice} per night at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (

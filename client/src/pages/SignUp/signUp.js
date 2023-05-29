@@ -41,12 +41,15 @@ const SignUp = () => {
 
 
             if (result.user) {
+                console.log(result)
                 dispatch({ type: 'LOGIN_START' });
                 try {
                     const res = await axios.post(`${baseURL}/auth/register`, {
                         username: uniqueUsername,
                         email: result.user.email,
-                        password: result.user.uid
+                        password: result.user.uid,
+                        profilePicture: result.user.photoURL,
+                        name: result.user.displayName
                     });
 
                     if (res.data !== undefined && res.data?.success) {

@@ -51,36 +51,36 @@ const Hotels = () => {
         ) : (
           <div className='hotelContainer'>
             {data?.map((hotel) => (
-              <div className='hotelCard' key={hotel._id}>
-                <Link className='hotelImageWrapper' to='/'>
+              <Link to={`/hotels/update/${hotel._id}`} className='hotelCard' key={hotel._id}>
+                <div className='hotelImageWrapper'>
                   <img
                     className='hotelImage'
                     src={hotel.photos[0] || 'https://cdn3.iconfinder.com/data/icons/map/500/hotel-512.png'}
                     alt=''
                   />
-                </Link>
-                <Link to='/' className='infoContainer'>
+                </div>
+                <div className='infoContainer'>
                   <div className='hotelName'>{hotel.name}</div>
                   <div className='hotelType'>{hotel.type}</div>
                   <div className='hotelTitle'>{hotel.title}</div>
                   <div className='hotelAddress'>{hotel.address}</div>
-                </Link>
-                <div className='buttonContainer'>
+                </div>
+                {/* <div className='buttonContainer'>
                   <button onClick={() => handleUpdate(hotel._id)} className='updateButton'>
                     Update
                   </button>
                   <button onClick={() => handleOpenDeleteBox(hotel._id)} className='deleteButton'>
                     Delete
                   </button>
-                </div>
-              </div>
+                </div> */}
+              </Link>
             ))}
           </div>
         )}
       </div>
       {alert && (
         <div className='deleteBox'>
-          <div className='deleteBoxWrapper'>
+          {/* <div className='deleteBoxWrapper'>
             <p className='alert'>Do you want to delete?</p>
             <p className='smallAlert'>This can't be undone.</p>
             <div className='buttonContainerWrapper'>
@@ -93,7 +93,7 @@ const Hotels = () => {
               </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

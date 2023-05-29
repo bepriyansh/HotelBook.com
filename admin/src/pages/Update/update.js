@@ -42,24 +42,37 @@ const Update = () => {
     };
 
     const [alert, setAlert] = useState(false);
-    const handleOpenUpdateBox = () => {
+    const [action, setAction] = useState("");
+
+    const handleOpenAlert = (action) => {
+        setAction(action);
         setAlert(true);
-    }
-    const handleUpdate = async () => {
-        const access_token = localStorage.getItem('access_token');
+    };
+
+    const handleAction = async () => {
+        setAction(action);
+        const access_token = localStorage.getItem("access_token");
         try {
-            await axios.patch(`${baseURL}/hotel/${access_token}/id/${hotelId}`, hotelData);
-            console.log("Hotel updated successfully");
-            reFetch();
+            if (action === "update") {
+                await axios.patch(`${baseURL}/hotel/${access_token}/id/${hotelId}`, hotelData);
+                console.log("Hotel updated successfully");
+                reFetch();
+                setAlert(false);
+            } else if (action === "delete") {
+                await axios.delete(`${baseURL}/hotel/${access_token}/id/${hotelId}`);
+                console.log("Hotel deleted");
+                reFetch();
+                setAlert(false);
+            }
             setAlert(false);
         } catch (error) {
             console.log(error);
         }
-    }
+    };
+    
     const handleCancel = () => {
         setAlert(false);
     }
-
     return (
         <div className='crud-hotel-wrapper'>
             <Navbar />
@@ -107,8 +120,10 @@ const Update = () => {
                                 </div>
                             </div>
                             <div className='updateButtonWrapper'>
-                                <button onClick={() => handleOpenUpdateBox()} className='updateButton'>Update</button>
-                                <button onClick={() => handleCancel()} className='cancelButton'>Cancel</button>
+                                <button onClick={() => handleOpenAlert("update")} className='updateButton'>Update</button>
+                                <button onClick={() => handleOpenAlert("delete")} className='deleteButton'>
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -125,20 +140,38 @@ const Update = () => {
                 // <div className='updateContainerWrapper'>
 
             }
-            {alert &&
-                <div className='deleteBox'>
-                    <div className='deleteBoxWrapper'>
-                        <p className='alert'>Do you want to update?</p>
-                        <p className='smallAlert'>This can't be undone.</p>
+            {alert && (
+                <div className="deleteBox">
+                    <div className="deleteBoxWrapper">
+                        <p className="alert">Do you want to {action}?</p>
+                        <p className="smallAlert">This can't be undone.</p>
                         <div className='buttonContainerWrapper'>
-                            <div className='buttonContainer'>
-                                <button onClick={() => handleUpdate()} className='updateButton'>Update</button>
-                                <button onClick={() => handleCancel()} className='cancelButton'>No</button>
+                            <div className="buttonContainer">
+                                {action === "delete" && (
+                                    <button
+                                        onClick={() => handleAction()}
+                                        className="deleteButton"
+                                    >
+                                        Delete
+                                    </button>
+                                )}
+                                {action === "update" && (
+                                    <button
+                                        onClick={() => handleAction()}
+                                        className="updateButton"
+                                    >
+                                        Update
+                                    </button>
+                                )}
+                                <button onClick={handleCancel} className="cancelButton">
+                                    No
+                                </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
-            }
+            )}
         </div>
     )
 }

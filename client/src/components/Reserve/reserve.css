@@ -2,7 +2,7 @@
     z-index: 1;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,8 @@
 .reserveContainer {
     position: relative;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     box-shadow: 0px 0px 45px rgba(0, 0, 0, 0.8);
 }
@@ -36,7 +37,7 @@
     margin: 8px;
     border-radius: 12px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    background-color: #ccc;
+    background-color: rgb(0, 0, 0,0.5);
 }
 .selectRooms{
     display: flex;
@@ -107,7 +108,7 @@
 .roomButton {
     border: none;
     padding: 10px 20px;
-    background-color: #0071c2;
+    background-color: #0027c2;
     color: white;
     font-weight: bold;
     cursor: pointer;

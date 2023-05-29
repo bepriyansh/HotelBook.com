@@ -89,7 +89,9 @@ const Header = () => {
                                                     onClick={() => handleSuggestionClick(user)}
                                                     className="searchSuggestion"
                                                 >
-                                                    {user.username}
+                                                    <Link to={`/user/${user._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                                                        {user.username}
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>
@@ -105,7 +107,9 @@ const Header = () => {
                                                     onClick={() => handleSuggestionClick(hotel)}
                                                     className="searchSuggestion"
                                                 >
-                                                    {hotel.name}
+                                                    <Link to={`/hotels/update/${hotel._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                                                        {hotel.name}
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>

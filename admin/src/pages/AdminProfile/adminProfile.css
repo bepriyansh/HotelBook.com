@@ -1,4 +1,4 @@
-.user-profile-page {
+.admin-profile-page {
     background-color: rgba(255, 255, 255, 0.9);
     background-image: linear-gradient(rgba(0, 0, 0, 0.746), rgb(72, 51, 211), rgba(0, 0, 0, 0.672));
     width: 100%;
@@ -9,7 +9,7 @@
     justify-content: center;
 }
 
-.user-profile-wrapper {
+.admin-profile-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +18,7 @@
     padding: 20px;
 }
 
-.user-profile {
+.admin-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,7 @@
     border-radius: 12px;
 }
 
-.profile-picture {
+.admin-profile-picture {
     width: 200px;
     height: 200px;
     border: 1px solid #ccc;
@@ -44,13 +44,13 @@
     margin-bottom: 20px;
 }
 
-.profile-picture img {
+.admin-profile-picture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.default-profile-picture {
+.default-admin-profile-picture {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +61,7 @@
     font-size: 20px;
 }
 
-.profile-info-wrapper {
+.admin-profile-info-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,7 @@
     width: 100%;
 }
 
-.profile-info {
+.admin-profile-info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +78,7 @@
     max-width: 400px;
 }
 
-.profile-info-label {
+.admin-profile-info-label {
     display: block;
     margin-bottom: 8px;
     color: white;
@@ -86,7 +86,7 @@
     max-width: 370px;
 }
 
-.profilePicture-label {
+.admin-profilePicture-label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +95,7 @@
     cursor: pointer;
 }
 
-.profile-info-input {
+.admin-profile-info-input {
     width: 100%;
     max-width: 370px;
     padding: 8px;
@@ -103,19 +103,13 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.profile-info-input[readOnly]{
-border: 1px solid #333;
-padding: 10px;
-color: white;
-background-color: rgba(0,0,0,0.4);
-backdrop-filter: blur(10px);
-cursor: not-allowed;
-}
-.profilePicture-input {
+
+.admin-profilePicture-input {
     display: none;
 }
 
-.profile-info-update-btn, .logout-btn {
+.admin-profile-info-update-btn,
+.logout-btn {
     margin-bottom: 10px;
     height: 35px;
     width: 100%;
@@ -136,11 +130,11 @@ cursor: not-allowed;
     transition: 100ms background-color ease-in-out;
 }
 
-.profile-info-update-btn:hover {
+.admin-profile-info-update-btn:hover {
     background-color: rgba(0, 0, 255, 0.7);
 }
 
-.logout-btn{
+.logout-btn {
     width: 20%;
     background-color: rgb(157, 22, 22);
 }

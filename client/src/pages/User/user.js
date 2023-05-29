@@ -90,7 +90,7 @@ const UserProfile = () => {
 
             ) : (
               <div className="default-profile-picture">
-                <label className='profilePicture-label' htmlFor='profilePicture'>+</label>
+                <label className='profilePicture-label' htmlFor='profilePicture'>Add Profile Picture</label>
               </div>
             )}
           </div>
@@ -100,14 +100,18 @@ const UserProfile = () => {
             <h2>{userInfo?.name}</h2>
             <form className='profile-info'>
               <label className='profile-info-label' htmlFor='name'>Name</label>
-              <input className='profile-info-input' value={userInfo?.name} onChange={handleChange} name='name' id='name' required />
+              <input className='profile-info-input' value={userInfo?.name} onChange={handleChange} placeholder='Enter name' name='name' id='name' required />
 
               <label className='profile-info-label' htmlFor='username'>Username</label>
-              <input className='profile-info-input' value={userInfo?.username} onChange={handleChange} name='username' id='username' required />
+              <input className='profile-info-input' value={userInfo?.username} onChange={handleChange} placeholder='Enter username' name='username' id='username' required />
+
+
+              <label className='profile-info-label' htmlFor='email'>Email</label>
+              <input className='profile-info-input' value={userInfo?.email} placeholder='Enter email' name='email' id='email' readOnly />
 
 
               <label className='profile-info-label' htmlFor='phone'>Phone</label>
-              <input className='profile-info-input' value={userInfo?.phone} onChange={handleChange} name='phone' id='phone' type='number' />
+              <input className='profile-info-input' value={userInfo?.phone} onChange={handleChange} placeholder='Enter phone number' name='phone' id='phone' type='number' />
             </form>
 
             <button className='profile-info-update-btn' onClick={handleProfileUpdate}>Update Profile</button>

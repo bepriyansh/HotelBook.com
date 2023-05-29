@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import './login.css';
 import { AuthContext } from '../../Context/authContext';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { baseURL } from '../../baseURL/baseURL';
 import { FcGoogle } from "react-icons/fc";
 import { auth, provider } from '../../components/GoogleAuth/googleAuth';
@@ -97,6 +97,7 @@ const Login = () => {
                     <FcGoogle />
                     Sign in with Google
                 </button>
+                <Link to='/signUp' className='auth-link'>Create new account</Link>
             </div>
         </div>
     )

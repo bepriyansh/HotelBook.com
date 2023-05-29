@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import './signUp.css';
 import axios from 'axios';
 import { baseURL } from '../../baseURL/baseURL';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/authContext';
 import { FcGoogle } from "react-icons/fc";
 import { auth, provider } from '../../components/GoogleAuth/googleAuth';
@@ -158,6 +158,8 @@ const SignUp = () => {
                     <FcGoogle/>
                     Sign up with Google
                 </button>
+
+                <Link to='/login' className='auth-link'>Log in</Link>
             </div>
         </div>
     );

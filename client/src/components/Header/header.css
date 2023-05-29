@@ -1,4 +1,5 @@
 .header {
+    z-index: 10000000000;
     width: 100%;
     background-color: rgba(85, 0, 255, 0.8);
     backdrop-filter: blur(10px);

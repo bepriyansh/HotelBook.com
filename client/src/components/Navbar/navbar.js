@@ -9,8 +9,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, dispatch } = useContext(AuthContext);
   const { data, error } = useFetch(`${baseURL}/user/userInfo/${localStorage.getItem("access_token")}/${user?._id}`);
-  console.log(error);
-  console.log(user);
+  // console.log(error);
+  // console.log(user);
   if (error || !user) {
     dispatch({ type: "LOGOUT" });
     localStorage.setItem("access_token", null);

@@ -1,6 +1,6 @@
 import Express from "express";
 import { createRoom, deleteRoom, getAllRooms, getBookingCount, getRoom, updateRoom, updateRoomAvailability } from "../controllers/room.js";
-import { verifyAdmin } from "../utils/verification.js";
+import { verifyAdmin, verifyUser } from "../utils/verification.js";
 const router = Express.Router();
 
 
@@ -18,7 +18,7 @@ router.get('/rooms/:hotelId/:id', getRoom);
 router.patch('/token/:access_token/:id', verifyAdmin, updateRoom);
 
 // UPDATE Room Availability
-router.patch('/availability/:id', updateRoomAvailability);
+router.patch('/availability/token/:access_token/:hotelId/:id/:roomId', verifyUser,updateRoomAvailability);
 
 // DELETE
 router.delete('/token/:access_token/:hotelId/:id', verifyAdmin, deleteRoom);

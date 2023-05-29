@@ -5,6 +5,7 @@ import { baseURL } from '../../baseURL/baseURL';
 import { useContext, useEffect, useState } from 'react';
 import { SearchContext } from '../../Context/searchContext';
 import axios from 'axios';
+import { AuthContext } from '../../Context/authContext';
 
 const Reserve = ({ setOpen, hotelId }) => {
 
@@ -58,10 +59,11 @@ const Reserve = ({ setOpen, hotelId }) => {
         // Otherwise, if isFound is false, indicating that none of the dates in unavailableDates match the dates in alldates, the function returns true
     };
 
+    const { user } = useContext(AuthContext);
     const handleClick = async () => {
         try {
             await Promise.all(selectedRooms.map((roomId) => {
-                const res = axios.patch(`${baseURL}/room/availability/${roomId}`, {
+                const res = axios.patch(`${baseURL}/room/availability/token/${localStorage.getItem("access_token")}/${hotelId}/${user._id}/${roomId}`, {
                     "dates": allDates
                 });
                 return res.data;

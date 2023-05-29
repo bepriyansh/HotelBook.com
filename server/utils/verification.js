@@ -11,7 +11,7 @@ export const verifyToken = (req, res, next) => {
 
     try {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        console.log("decodedToken : ", decodedToken);
+        // console.log("decodedToken : ", decodedToken);
         req.user = decodedToken;
         next();
     } catch (error) {
@@ -23,8 +23,8 @@ export const verifyToken = (req, res, next) => {
 export const verifyUser = (req, res, next) => {
     // console.log("from verifyUser : ", req.user);
     verifyToken(req, res, () => {
-        console.log("req from verifyUesr :::: ",req.user);
-        console.log('verifyUesr')
+        // console.log("req from verifyUesr :::: ",req.user);
+        // console.log('verifyUesr')
         if (req.user.id === req.params.id || req.user.isAdmin) {
             next();
         } else {
@@ -35,10 +35,10 @@ export const verifyUser = (req, res, next) => {
 
 export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
-        console.log("req from verifyAdmin :::: ", req.user);
-        console.log('verifyAdmin')
+        // console.log("req from verifyAdmin :::: ", req.user);
+        // console.log('verifyAdmin')
         if (req.user.isAdmin) {
-            console.log('working');
+            // console.log('working');
             next();
         } else {
             return next(createError(403, "Unauthorized"));

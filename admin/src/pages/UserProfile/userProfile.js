@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { baseURL } from '../../baseURL/baseURL';
 import useFetch from '../../hooks/useFetch';
+import Navbar from '../../components/Navbar/navbar';
 
 const UserProfile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -29,6 +30,7 @@ const UserProfile = () => {
 
     return (
         <div className='user-profile-page'>
+            <Navbar/>
             <div className="user-profile-wrapper">
                 <div className='user-profile'>
                     <div className="user-profile-picture">

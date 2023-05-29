@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { baseURL } from '../../baseURL/baseURL';
 import Navbar from '../../components/Navbar/navbar';
 import useFetch from '../../hooks/useFetch';
@@ -49,6 +49,7 @@ const Update = () => {
         setAlert(true);
     };
 
+    const navigate = useNavigate();
     const handleAction = async () => {
         setAction(action);
         const access_token = localStorage.getItem("access_token");
@@ -61,8 +62,8 @@ const Update = () => {
             } else if (action === "delete") {
                 await axios.delete(`${baseURL}/hotel/${access_token}/id/${hotelId}`);
                 console.log("Hotel deleted");
-                reFetch();
                 setAlert(false);
+                navigate('/hotels');
             }
             setAlert(false);
         } catch (error) {

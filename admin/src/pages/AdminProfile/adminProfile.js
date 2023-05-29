@@ -5,6 +5,7 @@ import { AuthContext } from '../../Context/authContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { baseURL } from '../../baseURL/baseURL';
 import useFetch from '../../hooks/useFetch';
+import Navbar from '../../components/Navbar/navbar';
 
 const AdminProfile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -80,6 +81,7 @@ const AdminProfile = () => {
 
     return (
         <div className='admin-profile-page'>
+            <Navbar/>
             <div className="admin-profile-wrapper">
                 <div className='admin-profile'>
                     <div className="admin-profile-picture">

@@ -53,16 +53,16 @@ const CreateHotel = () => {
     };
 
     const [files, setFiles] = useState([]);
-    const [creating, setCreating] = useState(false);
-
+    
     const handleFileChange = (e) => {
-        setCreating(true);
         const filesArray = Array.from(e.target.files); // Convert FileList to Array
         setFiles([...files, ...filesArray]);
     };
-
+    
+    const [creating, setCreating] = useState(false);
     const handleUpload = async (e) => {
         e.preventDefault();
+        setCreating(true);
         console.log(files)
         try {
             const list = await Promise.all(
@@ -87,10 +87,15 @@ const CreateHotel = () => {
                 photos: list,
             };
 
-            await axios.post(`${baseURL}/hotel/${localStorage.getItem('access_token')}`, newhotel);
+            const response = await axios.post(`${baseURL}/hotel/${localStorage.getItem('access_token')}`, newhotel);
             navigate('/hotels')
             console.log('Hotel created');
             setCreating(false);
+            const newHotelId = response.data._id;
+            console.log(newHotelId)
+
+            navigate(`/hotels/update/${newHotelId}`);
+
         } catch (err) { console.log(err) }
     };
     return (

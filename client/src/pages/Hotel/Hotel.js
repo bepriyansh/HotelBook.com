@@ -101,7 +101,7 @@ const Hotel = () => {
             Book a stay over ₹{data.cheapestPrice} per night at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
-            {data.photos?.map((photo, i) => (
+            {data.photos?.slice(0,6).map((photo, i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}

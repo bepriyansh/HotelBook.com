@@ -1,6 +1,9 @@
 import { baseURL } from '../../baseURL/baseURL';
 import useFetch from '../../hooks/useFetch';
 import './propertylist.css'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react';
+import { SearchContext } from '../../Context/searchContext';
 // import {Link} from 'react-router-dom'
 
 const Propertylist = () => {
@@ -13,15 +16,24 @@ const Propertylist = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
   ];
 
-  const { data, loading, error } = useFetch(`${baseURL}/hotel/countByType?limit=5`);
-  // console.log(data, loading, error);
+  const { data, loading } = useFetch(`${baseURL}/hotel/countByType?limit=5`);
+
+  const navigate = useNavigate();
+  const { destination, dates, options, dispatch } = useContext(SearchContext);
+  dispatch({ type: "RESET_SEARCH" });
+  const handleClick = (type) => {
+    navigate('/hotels', { state: { destination, type, dates, options } });
+    dispatch({ type: "NEW_SEARCH", payload: { type: type } });
+    // console.log("Dispatched from Hotel Search List's handleClick");
+  };
+
   return (
     <div>
       {
         loading ? <h1>Loading...</h1> :
           <div className="pList">
             {(data).map((data, index) => (
-              <div className='pListItem' key={index}>
+              <div onClick={() => handleClick(data.type)} className='pListItem' key={index}>
                 <img src={photoData[index]}
                   alt=""
                   className="pListImg"

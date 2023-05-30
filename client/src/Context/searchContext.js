@@ -1,7 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
 
-const INITIAL_STATE = JSON.parse(localStorage.getItem("searchState")) || {
-    destination: undefined,
+const INITIAL_STATE =  {
+    destination: '',
+    type: '',
     dates: [{
         endDate: new Date(),
         key: 'selection',
@@ -21,7 +22,6 @@ const SearchReducer = (state, action) => {
         case "NEW_SEARCH":
             return action.payload;
         case "RESET_SEARCH":
-            console.log("RESET_SEARCH");
             return INITIAL_STATE;
         default:
             return state;
@@ -31,27 +31,29 @@ const SearchReducer = (state, action) => {
 export const SearchContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
 
-    useEffect(() => {
-        localStorage.setItem("searchState", JSON.stringify({
-            destination: state.destination || undefined,
+    // useEffect(() => {
+    //     localStorage.setItem("searchState", JSON.stringify({
+    //         destination: state.destination || '',
+    //         type: state.type || '',
+    //         dates: [{
+    //             endDate: state.dates[0].endDate.toString() || new Date(),
+    //             key: 'selection',
+    //             startDate: state.dates[0].startDate.toString() || new Date()
+    //         }],
 
-            dates: [{
-                endDate: state.dates[0].endDate.toString() || new Date(),
-                key: 'selection',
-                startDate: state.dates[0].startDate.toString() || new Date()
-            }],
+    //         options: state.options || {},
+    //     }));
 
-            options: state.options || {},
-        }));
-
-    }, [state]);
+    // }, [state]);
 
     return (
         <SearchContext.Provider
             value={{
                 destination: state.destination,
+                type: state.type,
                 dates: state.dates,
                 options: state.options,
+                state: state,
                 dispatch
             }}>
             {children}

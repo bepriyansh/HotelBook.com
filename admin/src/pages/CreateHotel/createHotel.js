@@ -32,25 +32,25 @@ const CreateHotel = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const response = await axios.post('/api/hotels', formData);
-        console.log(response);
-        // Reset the form after submission
-        setFormData({
-            name: '',
-            type: '',
-            city: '',
-            address: '',
-            distance: '',
-            title: '',
-            description: '',
-            rating: 0,
-            // rooms: [],
-            cheapestPrice: 0,
-            featured: false,
-        });
-    };
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const response = await axios.post('/api/hotels', formData);
+    //     console.log(response);
+    //     // Reset the form after submission
+    //     setFormData({
+    //         name: '',
+    //         type: '',
+    //         city: '',
+    //         address: '',
+    //         distance: '',
+    //         title: '',
+    //         description: '',
+    //         rating: 0,
+    //         // rooms: [],
+    //         cheapestPrice: 0,
+    //         featured: false,
+    //     });
+    // };
 
     const [files, setFiles] = useState([]);
     
@@ -103,7 +103,7 @@ const CreateHotel = () => {
             <Navbar />
             <div className="crud-hotel">
                 <p className="crud-hotel__title">Create a Hotel</p>
-                <form className="crud-hotel__form" onSubmit={handleSubmit}>
+                <form className="crud-hotel__form" onSubmit={handleUpload}>
                     <label className="crud-hotel__label" htmlFor="name">Name:</label>
                     <input className="crud-hotel__input" type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
 

@@ -13,6 +13,7 @@ const SignUp = () => {
         username: '',
         email: '',
         password: '',
+        profilePicture:'https://yt3.ggpht.com/a/AATXAJwFy0FRrVodxUiLPk3ldEEYFjjzpUDV2FeGAw=s900-c-k-c0xffffffff-no-rj-mo',
     });
 
     const handleChange = (e) => {
@@ -102,7 +103,7 @@ const SignUp = () => {
         <div className='signup-container'>
             <div className='signup-box'>
                 <p className='signup-title'>Create new account</p>
-                <form className='signup-form' onSubmit={(e) => e.preventDefault()}>
+                <form className='signup-form' onSubmit={(e) => { e.preventDefault(); handleSignup()}}>
                     <label className='signup-label' htmlFor='username'>
                         Username
                     </label>
@@ -143,14 +144,14 @@ const SignUp = () => {
                     />
 
                     {error && <span className='signup-error-message'>{error.message}</span>}
-                </form>
 
                 <button
                     className='signup-btn'
-                    onClick={handleSignup}
-                >
+                    
+                    >
                     Sign up
                 </button>
+                    </form>
                 <button
                     className='googleAuth-btn'
                     onClick={handleGoogleSignUp}

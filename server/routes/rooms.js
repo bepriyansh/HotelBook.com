@@ -18,7 +18,7 @@ router.get('/rooms/:hotelId/:id', getRoom);
 router.patch('/token/:access_token/:id', verifyAdmin, updateRoom);
 
 // UPDATE Room Availability
-router.patch('/availability/token/:access_token/:hotelId/:id/:roomId', verifyUser,updateRoomAvailability);
+router.patch('/availability/token/:access_token/:id/:roomId', verifyUser,updateRoomAvailability);
 
 // DELETE
 router.delete('/token/:access_token/:hotelId/:id', verifyAdmin, deleteRoom);

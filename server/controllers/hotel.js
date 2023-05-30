@@ -14,13 +14,40 @@ export const createHotel = async (req, res, next) => {
 
 // READ operation to fetch all hotels
 export const getHotels = async (req, res, next) => {
-    const { min, max, limit, ...otherDetails } = req.query;
+    const { min, max, limit, city, type, ...otherDetails } = req.query;
+    // console.log(city, type);
     try {
-        const hotels = await Hotel.find({
-            ...otherDetails,
-            cheapestPrice: { $gt: min || -1, $lt: max || 999999 }
-        }).limit(limit);
-        res.json(hotels);
+        if (city === undefined && type === undefined) {
+            // console.log('first')
+            const hotels = await Hotel.find({
+                ...otherDetails,
+                cheapestPrice: { $gt: min || -1, $lt: max || 999999 }
+            }).limit(limit);
+            res.json(hotels);
+        } else if (type === '' || type === 'undefined' || type === undefined) {
+            const hotels = await Hotel.find({
+                ...otherDetails,
+                city: city,
+                cheapestPrice: { $gt: min || -1, $lt: max || 999999 }
+            }).limit(limit);
+            res.json(hotels);
+        } else if (city === '') {
+            const hotels = await Hotel.find({
+                ...otherDetails,
+                type: type,
+                cheapestPrice: { $gt: min || -1, $lt: max || 999999 }
+            }).limit(limit);
+            res.json(hotels);
+        } else {
+            // console.log('last')
+            const hotels = await Hotel.find({
+                ...otherDetails,
+                city: city,
+                type: type,
+                cheapestPrice: { $gt: min || -1, $lt: max || 999999 }
+            }).limit(limit);
+            res.json(hotels);
+        }
     } catch (error) {
         next(error);
     }

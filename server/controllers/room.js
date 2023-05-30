@@ -44,16 +44,6 @@ export const updateRoomAvailability = async (req, res, next) => {
                 },
             }
         );
-        await User.updateOne({ _id: req.params.id },
-            {
-                $push: {
-                    bookedRooms: {
-                        hotelId: req.params.hotelId,
-                        roomId: req.params.roomId,
-                        date: req.body.dates
-                    }
-                }
-            })
         res.status(200).json("Room status has been updated.");
     } catch (err) {
         next(err);

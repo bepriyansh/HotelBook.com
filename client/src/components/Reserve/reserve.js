@@ -63,7 +63,7 @@ const Reserve = ({ setOpen, hotelId }) => {
     const handleClick = async () => {
         try {
             await Promise.all(selectedRooms.map((roomId) => {
-                const res = axios.patch(`${baseURL}/room/availability/token/${localStorage.getItem("access_token")}/${hotelId}/${user._id}/${roomId}`, {
+                const res = axios.patch(`${baseURL}/room/availability/token/${localStorage.getItem("access_token")}/${user._id}/${roomId}`, {
                     "dates": allDates
                 });
                 return res.data;

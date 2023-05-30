@@ -47,9 +47,9 @@ const Hotel = () => {
     let newSlideNumber;
 
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? data.photos.length-1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === data.photos.length-1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber)
@@ -65,28 +65,28 @@ const Hotel = () => {
   };
   return (
     <div className='hotelPage'>
+      {open && (
+        <div className="slider">
+          <AiOutlineCloseCircle
+            className="close"
+            onClick={() => setOpen(false)}
+          />
+          <AiOutlineArrowLeft
+            className="arrow"
+            onClick={() => handleMove("l")}
+          />
+          <div className="sliderWrapper">
+            <img src={data.photos[slideNumber]} alt="" className="sliderImg" />
+          </div>
+          <AiOutlineArrowRight
+            className="arrow"
+            onClick={() => handleMove("r")}
+          />
+        </div>
+      )}
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
-        {open && (
-          <div className="slider">
-            <AiOutlineCloseCircle
-              className="close"
-              onClick={() => setOpen(false)}
-            />
-            <AiOutlineArrowLeft
-              className="arrow"
-              onClick={() => handleMove("l")}
-            />
-            <div className="sliderWrapper">
-              <img src={data.photos[slideNumber]} alt="" className="sliderImg" />
-            </div>
-            <AiOutlineArrowRight
-              className="arrow"
-              onClick={() => handleMove("r")}
-            />
-          </div>
-        )}
         <div className="hotelWrapper">
           <button className="bookNow" onClick={handleClick}>Reserve or Book Now!</button>
           <h1 className="hotelTitle">{data.name}</h1>

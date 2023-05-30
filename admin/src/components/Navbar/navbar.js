@@ -11,7 +11,7 @@ const Navbar = () => {
   const { data, error } = useFetch(`${baseURL}/user/userInfo/${localStorage.getItem("access_token")}/${user?._id}`);
   // console.log(error);
   // console.log(user);
-  if (!user.isAdmin ||error || !user) {
+  if (!user?.isAdmin ||error || !user) {
     dispatch({ type: "LOGOUT" });
     localStorage.setItem("access_token", null);
     navigate('/login');
@@ -27,7 +27,7 @@ const Navbar = () => {
             <Link to='/login' className='navButton'>Login</Link>
           </>
           }
-          {data && !error && <Link to={`/user/${data._id}`} className='navButton-userLogo'>
+          {data && !error && <Link to={`/admin/${data._id}`} className='navButton-userLogo'>
             <img
               className='userLogoButton'
               src={data.profilePicture}

@@ -14,6 +14,7 @@ const Hotels = () => {
   const location = useLocation();
 
   const [destination, setDestination] = useState(location.state.destination);
+  const [type, setType] = useState(location.state.type);
   const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
@@ -28,7 +29,7 @@ const Hotels = () => {
     })
   }
 
-  const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel?city=${destination}&min=${min || 0}&max=${max || 99999}`);
+  const { data, loading, error, reFetch } = useFetch(`${baseURL}/hotel?city=${destination}&type=${type}&min=${min || 0}&max=${max || 99999}`);
 
   const { dispatch } = useContext(SearchContext);
   const handleClick = () => {
@@ -124,6 +125,7 @@ const Hotels = () => {
             {
               !error && loading ? <h1>Loading...</h1> :
                 <div>
+                  {type && <h1 style={{margin:"0", marginBottom:"8px", padding:"0"}} className="lsTitle">Type : {type }</h1>}
                   {data.map(data => (<SearchItems data={data} key={data._id} />))}
                 </div>
             }

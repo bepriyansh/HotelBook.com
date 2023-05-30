@@ -8,6 +8,8 @@ import Propertylist from '../../components/PropertyList/propertylist'
 import './home.css'
 
 const Home = () => {
+  
+  
   return (
     <div className='home'>
       <Navbar />

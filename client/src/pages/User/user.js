@@ -16,10 +16,6 @@ const UserProfile = () => {
     setUserInfo(data);
   }, [data])
 
-  // useEffect(() => {
-  //   console.log(userInfo)
-  // }, [userInfo])
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo((prevData) => ({
@@ -52,10 +48,6 @@ const UserProfile = () => {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   console.log(userInfo);
-  // }, [userInfo])
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -96,6 +88,7 @@ const UserProfile = () => {
           </div>
 
           <input className='profilePicture-input' name='profilePicture' id='profilePicture' type="file" onChange={handleProfilePictureChange} />
+
           <div className="profile-info-wrapper">
             <h2>{userInfo?.name}</h2>
             <form className='profile-info'>

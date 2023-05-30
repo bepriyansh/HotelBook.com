@@ -1,13 +1,22 @@
+.fpWrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .fp {
     width: 100%;
     max-width: 1024px;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 20px;
   }
   
   .fpItem{
+    text-decoration: none;
+    color: inherit;
     width: 95%;
     max-width: 315px;
     gap: 10px;
@@ -20,9 +29,9 @@
     box-shadow: 0px 0px 5px rgba(200, 255, 0, 0.3);
   }
   .fpItem:hover{
-    transform: scale(1.03);
+    transform: scale(1.02);
     transition: 100ms ease-in-out;
-    box-shadow: 0px 0px 15px rgb(200, 255, 0, 0.5);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.6);
   }
   .fpImg{
     width: 100%;
@@ -32,17 +41,20 @@
   }
   
   .fpName{
+    font-size: 20px;
     color: #333;
     font-weight: bold;
     margin-left: 6px;
   }
   
   .fpCity{
+    color: blue;
     font-weight: 300;
     margin-left: 6px;
   }
   
   .fpPrice{
+    color: black;
     font-weight: 500;
     margin-left: 6px;
   }

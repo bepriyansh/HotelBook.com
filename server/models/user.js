@@ -25,7 +25,6 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: Number,
     },
-    bookedRooms:[{hotelId:String, roomId: String, date:{type:[Date]}}],
     isAdmin: {
         type: Boolean,
         default: false,

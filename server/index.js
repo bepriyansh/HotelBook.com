@@ -33,6 +33,6 @@ app.use('/api/v1/hotel', hotelRoutes);
 
 app.use(errorHandler);
 
-app.listen(8080, () => {
+app.listen(process.env.PORT, () => {
     console.log('Connected to Backend')
 })

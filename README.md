@@ -12,6 +12,17 @@ This is a MERN (MongoDB, Express, React, Node.js) project for a Hotel Booking Sy
 - Password Encryption: User passwords are encrypted using bcrypt.
 - Search Hotels: Users can search for hotels based on the desired city and date range.
 - City Suggestions: As users type in the search bar, they receive suggestions for cities.
+  
+![Screenshot 2023-10-31 222654](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/1989c57f-8261-4abc-b84a-f2eb27846508)
+![Screenshot 2023-10-31 222708](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/33901ca5-f36c-40d0-9706-42d73ca3b002)
+![Screenshot 2023-10-31 222930](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/3d3764b8-7a07-46ea-b13d-77563c364558)
+![Screenshot 2023-10-31 222939](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/900caa26-1059-4974-99f9-30a3910acd32)
+![Screenshot 2023-10-31 222945](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/30de7dfe-e010-4281-ab94-80c041f898f3)
+![Screenshot 2023-10-31 222956](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/33a829d0-db67-4485-90e9-0408ee72c97d)
+![Screenshot 2023-10-31 223025](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/ffdba281-f4dd-41e1-a545-f7639d0b96c5)
+![Screenshot 2023-10-31 223037](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/87c79026-74b5-4ad1-9637-4f4e3dc1319c)
+
+  
 
 ### Admin Side
 
@@ -19,6 +30,9 @@ This is a MERN (MongoDB, Express, React, Node.js) project for a Hotel Booking Sy
 - Room Management: Admin can add, upadate and delete rooms for each hotel.
 - Admin Profiles: Admin can create additional admin profiles.
 - User Profile Deletion: Admin can delete user profiles.
+
+  ![Screenshot 2023-10-31 223843](https://github.com/thepriyansh01/HotelBook.com/assets/124820498/b30f31a7-1258-4397-b64c-672e0b7bf51c)
+
 
 ### State Management
 
